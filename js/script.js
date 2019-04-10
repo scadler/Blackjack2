@@ -15,21 +15,6 @@ var handOne = "";
  });
 });
 
-$("#hit").click(function(){
-var handThree = "";
-    $.ajax({
-    url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8",
-    method: "GET",
-     success: function(response) {
-         var deckID = `${response.deck_id}`;
-         console.log(deckID);
-         getHand(deckID);
-         userScoreFunc();
-     } 
- });
-});
-
-
 function getHand(deckID){
   var handZero = "";
   var handOne = "";
