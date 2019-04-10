@@ -10,7 +10,6 @@ $("#start").click(function(){
          getHand(deckID);
      } 
  });
- $("#playerHand").append("test");
 });
 function getHand(deckID){
  console.log(deckID);
