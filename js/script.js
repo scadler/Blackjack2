@@ -205,7 +205,7 @@ $.ajax({
      var handComp = `<img class="handImg" src=${response.cards[0].image}\>`;
      $("#playerHand").append(handComp);
      var cardComp = `${response.cards[0].code}`;
-     
+(compScore < 16){
  if(cardComp === "2D" || cardComp === "2C" || cardComp === "2H" || cardComp === "2S"){
   compScore = compScore +2;
  } 
@@ -245,6 +245,7 @@ $.ajax({
  else if(cardComp === "AD" ||cardComp === "AC" ||cardComp === "AH" ||cardComp === "AS"){
   compScore = compScore +11;
  }
+}
     },
 },
 )}
