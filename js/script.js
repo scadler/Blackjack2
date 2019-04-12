@@ -2,6 +2,8 @@
 var hand = ""
 var startClicked = false;
 $("#start").click(function(){
+$("#winner").text("");
+$("#compPoints").text("");
 var userScore = 0;
 var handZero = "";
 var handOne = "";
@@ -204,6 +206,7 @@ function compDraw(deckID){
 while(compScore < 16){
  type = Math.ceil(Math.random()*3);
  value = Math.ceil(Math.random()*13)
+  compScore = compScore + value;
  if(value === 1){
   value = "A";
  }
@@ -255,15 +258,21 @@ while(compScore < 16){
  if(type === 4){
   type = "S";
  }
- var compImg  = "<img class='handImg' src='https://deckofcardsapi.com/static/img/'"+ value + type +".png">
+ var compImg  = "<img class='handImg' src='https://deckofcardsapi.com/static/img/'"+ value + type +"'.png'">
 $("#compHand").append(compImg);
- compScore = 17;
 }
+console.log(compScore);
 var userPointsVal = Number($("#userPoints").text());
- if(userPointsVal > compScore){
+ if(userPointsVal > compScore && userPointsVal < 22){
   $("#winner").text("User");
+  $("#compPoints").text("VS "+ compScore);
+ }
+ else if(userPointsVal < 22 && compScore > 21){
+  $("#winner").text("User");
+  $("#compPoints").text("VS "+ compScore);
  }
  else{
   $("#winner").text("Computer");
+  $("#compPoints").text(" VS "+ compScore);
  }
 }
