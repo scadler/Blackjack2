@@ -9,18 +9,20 @@
     <body>
         <div class="page">
             <div class="header">
-                <button class="button" id="start">Deal</button>
-                <button class="button" id="hit">Hit</button>
-                <button class="button" id="stand">Stand</button>
-                <button class="button" id="instuction">How To Play</button>
+                <div class="buttons">
+                    <button class="button" id="start">Deal</button>
+                    <button class="button" id="hit">Hit</button>
+                    <button class="button" id="stand">Stand</button>
+                    <button class="button" id="instuction">How To Play</button>
+                </div>
+            </div>
+            <div class="table">
+                <h1 id="userHTML"> Score: <span id="userPoints">0</span> <span id="compPoints"></span></h1>
+                <div id="playerHand"></div>
+                <div id="compHand"></div>
+                <h1><span id="winner"></span></h1>
             </div>
         </div>
-        <div id="playerHand">
-        </div>
-        <h1 id="userHTML"> Score: <span id="userPoints">0</span> <span id="compPoints"></span></h1>
-        <div id="compHand">
-        </div>
-        <h1><span id="winner"></span></h1>
        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Your Javascript -->
