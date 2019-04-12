@@ -1,14 +1,12 @@
 /* global $ */
 var hand = ""
 $("#start").click(function(){
-
 var userScore = 0;
 var handZero = "";
 var handOne = "";
 var cardAScore = 0;
 var cardBScore = 0;
 var cardCScore = 0;
-var cardDScore = 0;
     $.ajax({
     url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8",
     method: "GET",
@@ -18,6 +16,9 @@ var cardDScore = 0;
          getHand(deckID);
          hit(deckID);
          $("userPoints").text("help");
+         $("#stand").click(function(){
+          compDraw(deckID);
+         });
      } 
  });
 });
@@ -136,15 +137,14 @@ $("#instruction").click(function(){
 
 function hit(deckID){
 $("#hit").click(function(){
-console.log("hit")
+console.log("hit");
 var userScoreHit = 0;
 var handTwo = "";
-var userPointsVal
+var userPointsVal;
 $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
     method: "GET",
     success: function(response){
-     handTwo = "";
      handTwo = `<img class="handImg" src=${response.cards[0].image}\>`;
      $("#playerHand").append(handTwo);
      var cardC = `${response.cards[0].code}`;
@@ -196,4 +196,18 @@ if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
 }
 $("#userPoints").text(userScore);
 
+function compDraw(deckID){
+if(startCounter === false){
+$.ajax({
+    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
+    method: "GET",
+    success: function(response){
+     var handComp = `<img class="handImg" src=${response.cards[0].image}\>`;
+     $("#playerHand").append(handComp);
+     var cardComp = `${response.cards[0].code}`;
+    },
+},
+)}
+startClicked = true;
+}
 //   link to api site ---> https://deckofcardsapi.com/
