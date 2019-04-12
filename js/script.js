@@ -5,6 +5,10 @@ $("#start").click(function(){
 var userScore = 0;
 var handZero = "";
 var handOne = "";
+var cardAScore = 0;
+var cardBScore = 0;
+var cardCScore = 0;
+var cardDScore = 0;
     $.ajax({
     url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8",
     method: "GET",
@@ -12,7 +16,7 @@ var handOne = "";
          var deckID = `${response.deck_id}`;
          console.log(deckID);
          getHand(deckID);
-         userScoreFunc();
+         hit(deckID);
          $("userPoints").text("help");
      } 
  });
@@ -35,85 +39,87 @@ function getHand(deckID){
          $("#playerHand").append(handZero);
          $("#playerHand").append(handOne);
          var userScore = 0;
-         if(cardA === "1D" ||cardA === "1C" || cardA === "1H" ||cardA === "1S"){
-  userScore = userScore +1;
- }
+         console.log(cardA);
+         console.log(cardB);
  if(cardA === "2D" ||cardA === "2C" ||cardA === "2H" ||cardA === "2S"){
   userScore = userScore +2;
  } 
- if(cardA === "3D" ||cardA === "3C" ||cardA === "3H" ||cardA === "3S"){
+ else if(cardA === "3D" ||cardA === "3C" ||cardA === "3H" ||cardA === "3S"){
   userScore = userScore +3;
  }
- if(cardA === "4D" ||cardA === "4C" ||cardA === "4H" ||cardA === "4S"){
+ else if(cardA === "4D" ||cardA === "4C" ||cardA === "4H" ||cardA === "4S"){
   userScore = userScore +4;
  }
- if(cardA === "5D" ||cardA === "5C" ||cardA === "5H" ||cardA === "5S"){
+ else if(cardA === "5D" ||cardA === "5C" ||cardA === "5H" ||cardA === "5S"){
   userScore = userScore +5;
  } 
- if(cardA === "6D" ||cardA === "6C" ||cardA === "6H" ||cardA === "6S"){
+ else if(cardA === "6D" ||cardA === "6C" ||cardA === "6H" ||cardA === "6S"){
   userScore = userScore +6;
  } 
- if(cardA === "7D" ||cardA === "7C" ||cardA === "7H" ||cardA === "7S"){
+ else if(cardA === "7D" ||cardA === "7C" ||cardA === "7H" ||cardA === "7S"){
   userScore = userScore +7;
  } 
- if(cardA === "8D" ||cardA === "8C" ||cardA === "8H" ||cardA === "8S"){
+ else if(cardA === "8D" ||cardA === "8C" ||cardA === "8H" ||cardA === "8S"){
   userScore = userScore +8;
  } 
- if(cardA === "9D" ||cardA === "9C" ||cardA === "9H" ||cardA === "9S"){
+ else if(cardA === "9D" ||cardA === "9C" ||cardA === "9H" ||cardA === "9S"){
   userScore = userScore +9;
+ }
+ else if(cardA === "0D" ||cardA === "0C" ||cardA === "0H" ||cardA === "0S"){
+  userScore = userScore +10;
  } 
- if(cardA === "JD" ||cardA === "JC" ||cardA === "JH" ||cardA === "JS"){
+ else if(cardA === "JD" ||cardA === "JC" ||cardA === "JH" ||cardA === "JS"){
   userScore = userScore +10;
  }
- if(cardA === "QD" ||cardA === "QC" ||cardA === "QH" ||cardA === "QS"){
+ else if(cardA === "QD" ||cardA === "QC" ||cardA === "QH" ||cardA === "QS"){
   userScore = userScore +10;
  } 
- if(cardA === "KD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
+ else if(cardA === "KD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
   userScore = userScore +10;
  } 
- if(cardA === "AD" ||cardA === "AC" ||cardA === "AH" ||cardA === "AS"){
+ else if(cardA === "AD" ||cardA === "AC" ||cardA === "AH" ||cardA === "AS"){
   userScore = userScore +11;
  }
  
  
  
- if(cardB === "1D" ||cardB === "1C" ||cardB === "1H" ||cardB === "1S"){
-  userScore = userScore +1;
- }
- if(cardB === "2D" ||cardB === "2C" ||cardB === "2H" ||cardB === "2S"){
+ if(cardB === "2D" || cardB === "2C" || cardB === "2H" || cardB === "2S"){
   userScore = userScore +2;
  } 
- if(cardB === "3D" ||cardB === "3C" ||cardB === "3H" ||cardB === "3S"){
+ else if(cardB === "3D" || cardB === "3C" || cardB === "3H" || cardB === "3S"){
   userScore = userScore +3;
  }
- if(cardB === "4D" ||cardB === "4C" ||cardB === "4H" ||cardB === "4S"){
+ else if(cardB === "4D" || cardB === "4C" || cardB === "4H" || cardB === "4S"){
   userScore = userScore +4;
  }
- if(cardB === "5D" ||cardB === "5C" ||cardB === "5H" ||cardB === "5S"){
+ else if(cardB === "5D" ||cardB === "5C" ||cardB === "5H" ||cardB === "5S"){
   userScore = userScore +5;
  } 
- if(cardB === "6D" ||cardB === "6C" ||cardB === "6H" ||cardB === "6S"){
+ else if(cardB === "6D" ||cardB === "6C" ||cardB === "6H" ||cardB === "6S"){
   userScore = userScore +6;
  } 
- if(cardB === "7D" ||cardB === "7C" ||cardB === "7H" ||cardB === "7S"){
+ else if(cardB === "7D" ||cardB === "7C" ||cardB === "7H" ||cardB === "7S"){
   userScore = userScore +7;
  } 
- if(cardB === "8D" ||cardB === "8C" ||cardB === "8H" ||cardB === "8S"){
+ else if(cardB === "8D" ||cardB === "8C" ||cardB === "8H" ||cardB === "8S"){
   userScore = userScore +8;
  } 
- if(cardB === "9D" ||cardB === "9C" ||cardB === "9H" ||cardB === "9S"){
+ else if(cardB === "9D" ||cardB === "9C" ||cardB === "9H" ||cardB === "9S"){
   userScore = userScore +9;
- } 
- if(cardB === "JD" ||cardB === "JC" ||cardB === "JH" ||cardB === "JS"){
+ }
+ else if(cardB === "0D" ||cardB === "0C" ||cardB === "0H" ||cardB === "0S"){
   userScore = userScore +10;
  }
- if(cardB === "QD" ||cardB === "QC" ||cardB === "QH" ||cardB === "QS"){
+ else if(cardB === "JD" ||cardB === "JC" ||cardB === "JH" ||cardB === "JS"){
+  userScore = userScore +10;
+ }
+ else if(cardB === "QD" ||cardB === "QC" ||cardB === "QH" ||cardB === "QS"){
   userScore = userScore +10;
  } 
- if(cardB === "KD" ||cardB === "KC" ||cardB === "KH" ||cardB === "KS"){
+ else if(cardB === "KD" ||cardB === "KC" ||cardB === "KH" ||cardB === "KS"){
   userScore = userScore +10;
  } 
- if(cardB === "AD" ||cardB === "AC" ||cardB === "AH" ||cardB === "AS"){
+ else if(cardB === "AD" ||cardB === "AC" ||cardB === "AH" ||cardB === "AS"){
   userScore = userScore +11;
  }
  console.log("func");
@@ -128,99 +134,66 @@ $("#instruction").click(function(){
  $("#instruction").alert("The rules are as follow");
 });
 
-function userScoreFunc(){
- var userScore = 0;
- if(cardA === "1D" || "1C" || "1H" || "1S"){
-  userScore = userScore +1;
+function hit(deckID){
+$("#hit").click(function(){
+console.log("hit")
+var userScoreHit = 0;
+var handTwo = "";
+var userPointsVal
+$.ajax({
+    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
+    method: "GET",
+    success: function(response){
+     handTwo = "";
+     handTwo = `<img class="handImg" src=${response.cards[0].image}\>`;
+     $("#playerHand").append(handTwo);
+     var cardC = `${response.cards[0].code}`;
+if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
+  userScoreHit = userScoreHit +2;
+ } 
+ else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
+  userScoreHit = userScoreHit +3;
  }
- if(cardA === "2D" || "2C" || "2H" || "2S"){
-  userScore = userScore +2;
- } 
- if(cardA === "3D" || "3C" || "3H" || "3S"){
-  userScore = userScore +3;
+ else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
+  userScoreHit = userScoreHit +4;
  }
- if(cardA === "4D" || "4C" || "4H" || "4S"){
-  userScore = userScore +4;
+ else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
+  userScoreHit = userScoreHit +5;
+ } 
+ else if(cardC === "6D" ||cardC === "6C" ||cardC === "6H" ||cardC === "6S"){
+  userScoreHit = userScoreHit +6;
+ } 
+ else if(cardC === "7D" ||cardC === "7C" ||cardC === "7H" ||cardC === "7S"){
+  userScoreHit = userScoreHit +7;
+ } 
+ else if(cardC === "8D" ||cardC === "8C" ||cardC === "8H" ||cardC === "8S"){
+  userScoreHit = userScoreHit +8;
+ } 
+ else if(cardC === "9D" ||cardC === "9C" ||cardC === "9H" ||cardC === "9S"){
+  userScoreHit = userScoreHit +9;
  }
- if(cardA === "5D" || "5C" || "5H" || "5S"){
-  userScore = userScore +5;
- } 
- if(cardA === "6D" || "6C" || "6H" || "6S"){
-  userScore = userScore +6;
- } 
- if(cardA === "7D" || "7C" || "7H" || "7S"){
-  userScore = userScore +7;
- } 
- if(cardA === "8D" || "8C" || "8H" || "8S"){
-  userScore = userScore +8;
- } 
- if(cardA === "9D" || "9C" || "9H" || "9S"){
-  userScore = userScore +9;
- } 
- if(cardA === "JD" || "JC" || "JH" || "JS"){
-  userScore = userScore +10;
+ else if(cardC === "0D" ||cardC === "0C" ||cardC === "0H" ||cardC === "0S"){
+  userScoreHit = userScoreHit +10;
  }
- if(cardA === "QD" || "QC" || "QH" || "QS"){
-  userScore = userScore +10;
- } 
- if(cardA === "KD" || "KC" || "KH" || "KS"){
-  userScore = userScore +10;
- } 
- if(cardA === "AD" || "AC" || "AH" || "AS"){
-  userScore = userScore +11;
+ else if(cardC === "JD" ||cardC === "JC" ||cardC === "JH" ||cardC === "JS"){
+  userScoreHit = userScoreHit +10;
  }
- 
- 
- 
- if(cardB === "1D" || "1C" || "1H" || "1S"){
-  userScore = userScore +1;
+ else if(cardC === "QD" ||cardC === "QC" ||cardC === "QH" ||cardC === "QS"){
+  userScoreHit = userScoreHit +10;
+ } 
+ else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
+  userScoreHit = userScoreHit +10;
+ } 
+ else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
+  userScoreHit = userScoreHit +11;
  }
- if(cardB === "2D" || "2C" || "2H" || "2S"){
-  userScore = userScore +2;
- } 
- if(cardB === "3D" || "3C" || "3H" || "3S"){
-  userScore = userScore +3;
- }
- if(cardB === "4D" || "4C" || "4H" || "4S"){
-  userScore = userScore +4;
- }
- if(cardB === "5D" || "5C" || "5H" || "5S"){
-  userScore = userScore +5;
- } 
- if(cardB === "6D" || "6C" || "6H" || "6S"){
-  userScore = userScore +6;
- } 
- if(cardB === "7D" || "7C" || "7H" || "7S"){
-  userScore = userScore +7;
- } 
- if(cardB === "8D" || "8C" || "8H" || "8S"){
-  userScore = userScore +8;
- } 
- if(cardB === "9D" || "9C" || "9H" || "9S"){
-  userScore = userScore +9;
- } 
- if(cardB === "JD" || "JC" || "JH" || "JS"){
-  userScore = userScore +10;
- }
- if(cardB === "QD" || "QC" || "QH" || "QS"){
-  userScore = userScore +10;
- } 
- if(cardB === "KD" || "KC" || "KH" || "KS"){
-  userScore = userScore +10;
- } 
- if(cardB === "AD" || "AC" || "AH" || "AS"){
-  userScore = userScore +11;
- }
- console.log("func");
- console.log(userScore);
-$("#userPoints").text(userScore);
+ userPointsVal = Number($("#userPoints").text());
+ $("#userPoints").text(userPointsVal + userScoreHit);
+    },
+},
+)}
+);
 }
-
-
-
-
-
-
-
+$("#userPoints").text(userScore);
 
 //   link to api site ---> https://deckofcardsapi.com/
