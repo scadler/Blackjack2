@@ -1,5 +1,6 @@
 /* global $ */
 var hand = ""
+var startClicked = false;
 $("#start").click(function(){
 var userScore = 0;
 var handZero = "";
@@ -197,7 +198,6 @@ if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
 $("#userPoints").text(userScore);
 
 function compDraw(deckID){
-if(startCounter === false){
 $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
     method: "GET",
@@ -205,9 +205,47 @@ $.ajax({
      var handComp = `<img class="handImg" src=${response.cards[0].image}\>`;
      $("#playerHand").append(handComp);
      var cardComp = `${response.cards[0].code}`;
+     
+ if(cardComp === "2D" || cardComp === "2C" || cardComp === "2H" || cardComp === "2S"){
+  compScore = compScore +2;
+ } 
+ else if(cardComp === "3D" || cardComp === "3C" || cardComp === "3H" || cardComp === "3S"){
+  compScore = compScore +3;
+ }
+ else if(cardComp === "4D" || cardComp === "4C" || cardComp === "4H" || cardComp === "4S"){
+  compScore = compScore +4;
+ }
+ else if(cardComp === "5D" ||cardComp === "5C" ||cardComp === "5H" ||cardComp === "5S"){
+  compScore = compScore +5;
+ } 
+ else if(cardComp === "6D" ||cardComp === "6C" ||cardComp === "6H" ||cardComp === "6S"){
+  compScore = compScore +6;
+ } 
+ else if(cardComp === "7D" ||cardComp === "7C" ||cardComp === "7H" ||cardComp === "7S"){
+  compScore = compScore +7;
+ } 
+ else if(cardComp === "8D" ||cardComp === "8C" ||cardComp === "8H" ||cardComp === "8S"){
+  compScore = compScore +8;
+ } 
+ else if(cardComp === "9D" ||cardComp === "9C" ||cardComp === "9H" ||cardComp === "9S"){
+  compScore = compScore +9;
+ }
+ else if(cardComp === "0D" ||cardComp === "0C" ||cardComp === "0H" ||cardComp === "0S"){
+  compScore = compScore +10;
+ }
+ else if(cardComp === "JD" ||cardComp === "JC" ||cardComp === "JH" ||cardComp === "JS"){
+  compScore = compScore +10;
+ }
+ else if(cardComp === "QD" ||cardComp === "QC" ||cardComp === "QH" ||cardComp === "QS"){
+  compScore = compScore +10;
+ } 
+ else if(cardComp === "KD" ||cardComp === "KC" ||cardComp === "KH" ||cardComp === "KS"){
+  compScore = compScore +10;
+ } 
+ else if(cardComp === "AD" ||cardComp === "AC" ||cardComp === "AH" ||cardComp === "AS"){
+  compScore = compScore +11;
+ }
     },
 },
 )}
-startClicked = true;
-}
 //   link to api site ---> https://deckofcardsapi.com/
