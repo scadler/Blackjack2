@@ -209,52 +209,52 @@ $.ajax({
     method: "GET",
     success: function(response){
       compCardImg = `<img class="handImg" src=${response.cards[0].image}\>`;
-      compCardID = `${response.cards[0].value}`;
+      compCardID = `${response.cards[0].code}`;
       $("#compHand").append(compCardImg);
-        if(compCardID === 2){
+        if(compCardID === "2D" || compCardID === "2C" || compCardID === "2H" || compCardID === "2S"){
          compScore = compScore +2;
-        } 
-        else if(compCardID === 3){
+        }
+        else if(compCardID === "3D" || compCardID === "3C" || compCardID === "3H" || compCardID === "3S"){
          compScore = compScore +3;
         }
-        else if(compCardID === 4){
+        else if(compCardID === "4D" || compCardID === "4C" || compCardID === "4H" || compCardID === "4S"){
          compScore = compScore +4;
         }
-        else if(compCardID === 5){
+        else if(compCardID === "5D" || compCardID === "5C" || compCardID === "5H" || compCardID === "5S"){
          compScore = compScore +5;
-        } 
-        else if(compCardID === 6){
+        }
+        else if(compCardID === "6D" || compCardID === "6C" || compCardID === "6H" || compCardID === "6S"){
          compScore = compScore +6;
-        } 
-        else if(compCardID === 7){
+        }
+        else if(compCardID === "7D" || compCardID === "7C" || compCardID === "7H" || compCardID === "7S"){
          compScore = compScore +7;
-        } 
-        else if(compCardID === 8){
+        }
+        else if(compCardID === "8D" || compCardID === "8C" || compCardID === "8H" || compCardID === "8S"){
          compScore = compScore +8;
-        } 
-        else if(compCardID === 9){
+        }
+        else if(compCardID === "9D" || compCardID === "9C" || compCardID === "9H" || compCardID === "9S"){
          compScore = compScore +9;
         }
-        else if(compCardID === 0){
+        else if(compCardID === "0D" || compCardID === "0C" || compCardID === "0H" || compCardID === "0S"){
          compScore = compScore +10;
         }
-        else if(compCardID === "JACK"){
+        else if(compCardID === "JD" || compCardID === "JC" || compCardID === "JH" || compCardID === "JS"){
          compScore = compScore +10;
         }
-        else if(compCardID === "QUEEN"){
+        else if(compCardID === "QD" || compCardID === "QC" || compCardID === "QH" || compCardID === "QS"){
          compScore = compScore +10;
-        } 
-        else if(compCardID === "KING"){
+        }
+        else if(compCardID === "KD" || compCardID === "KC" || compCardID === "KH" || compCardID === "KS"){
          compScore = compScore +10;
-        } 
-        else if(compCardID === "ACE"){
+        }
+        else if(compCardID === "AD" || compCardID === "AC" || compCardID === "AH" || compCardID === "AS"){
          compScore = compScore +11;
         }
         console.log(compScore+" works1");
     },
 },
 );
-
+compScore = 20
 $("#compHand").append();
 }
 console.log(compScore);
