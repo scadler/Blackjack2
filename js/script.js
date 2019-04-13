@@ -1,4 +1,8 @@
 /* global $ */
+//!!!!!!!!!!!!!!!!!!!!!!!!
+//Fix the multiple image displaying bug
+//Fix the hit counter bug
+//!!!!!!!!!!!!!!!!!!!!!!!!
 var hand = ""
 var startClicked = false;
 $("#start").click(function(){
