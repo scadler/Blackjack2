@@ -201,41 +201,112 @@ $("#userPoints").text(userScore);
 
 function compDraw(deckID){
  var compScore = 0;
- var type = 0;
- var value = 0;
+ var compCardID = "";
+ var compCardImg = "";
 while(compScore < 16){
- type = Math.ceil(Math.random()*3);
+$.ajax({
+    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
+    method: "GET",
+    success: function(response){
+      compCardImg = `<img class="handImg" src=${response.cards[0].image}\>`;
+      compCardID = `${response.cards[0].value}`;
+      $("#compHand").append(compCardImg);
+        if(compCardID === "2"){
+         compScore = compScore +2;
+        } 
+        else if(compCardID === "3"){
+         compScore = compScore +3;
+        }
+        else if(compCardID === "4"){
+         compScore = compScore +4;
+        }
+        else if(compCardID === "5"){
+         compScore = compScore +5;
+        } 
+        else if(compCardID === "6"){
+         compScore = compScore +6;
+        } 
+        else if(compCardID === "7"){
+         compScore = compScore +7;
+        } 
+        else if(compCardID === "8"){
+         compScore = compScore +8;
+        } 
+        else if(compCardID === "9"){
+         compScore = compScore +9;
+        }
+        else if(compCardID === "0"){
+         compScore = compScore +10;
+        }
+        else if(compCardID === "JACK"){
+         compScore = compScore +10;
+        }
+        else if(compCardID === "QUEEN"){
+         compScore = compScore +10;
+        } 
+        else if(compCardID === "KING"){
+         compScore = compScore +10;
+        } 
+        else if(compCardID === "ACE"){
+         compScore = compScore +11;
+        }
+        console.log(compScore)
+    },
+},
+);
+   
+compScore=20;
+$("#compHand").append();
+}
+console.log(compScore);
+var userPointsVal = Number($("#userPoints").text());
+ if(userPointsVal > compScore && userPointsVal < 22){
+  $("#winner").text("User");
+  $("#compPoints").text("VS "+ compScore);
+ }
+ else if(userPointsVal < 22 && compScore > 21){
+  $("#winner").text("User");
+  $("#compPoints").text("VS "+ compScore);
+ }
+ else{
+  $("#winner").text("Computer");
+  $("#compPoints").text(" VS "+ compScore);
+ }
+}
+
+function placeholder(){
+  type = Math.ceil(Math.random()*3);
  value = Math.ceil(Math.random()*13)
   compScore = compScore + value;
  if(value === 1){
   value = "A";
  }
  if(value === 2){
-  value = 2;
+  value = "2";
  }
  if(value === 3){
-  value = 3;
+  value = "3";
  }
  if(value === 4){
-  value = 4;
+  value = "4";
  }
  if(value === 5){
-  value = 5;
+  value = "5";
  }
  if(value === 6){
-  value = 6;
+  value = "6";
  }
  if(value === 7){
-  value = 7;
+  value = "7";
  }
  if(value === 8){
-  value = 8;
+  value = "8";
  }
  if(value === 9){
-  value = 9;
+  value = "9";
  }
  if(value === 10){
-  value = 0;
+  value = "0";
  }
  if(value === 11){
   value = "J";
@@ -258,21 +329,7 @@ while(compScore < 16){
  if(type === 4){
   type = "S";
  }
- var compImg  = "<img class='handImg' src='https://deckofcardsapi.com/static/img/'"+ value + type +"'.png'">
-$("#compHand").append(compImg);
-}
-console.log(compScore);
-var userPointsVal = Number($("#userPoints").text());
- if(userPointsVal > compScore && userPointsVal < 22){
-  $("#winner").text("User");
-  $("#compPoints").text("VS "+ compScore);
- }
- else if(userPointsVal < 22 && compScore > 21){
-  $("#winner").text("User");
-  $("#compPoints").text("VS "+ compScore);
- }
- else{
-  $("#winner").text("Computer");
-  $("#compPoints").text(" VS "+ compScore);
- }
+ var cardId = value + type;
+ console.log(cardId);
+//console.log"<img class='handImg' src='https://deckofcardsapi.com/static/img/'"+cardId+".png">
 }
