@@ -204,13 +204,16 @@ function compDraw(deckID){
  var compScore = 0;
  var compCardID = "";
  var compCardImg = "";
-while(compScore < 16){
+ var i = -1;
+//while(compScore < 16){
 $.ajax({
-    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
+    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=8",
     method: "GET",
     success: function(response){
-      compCardImg = `<img class="compHandImg" src=${response.cards[0].image}\>`;
-      compCardID = `${response.cards[0].code}`;
+     while(compScore <16 && i < 8){
+      i = i+1;
+      compCardImg = `<img class="compHandImg" src=${response.cards[i].image}\>`;
+      compCardID = `${response.cards[i].code}`;
       $("#compHand").append(compCardImg);
         if(compCardID === "2D" || compCardID === "2C" || compCardID === "2H" || compCardID === "2S"){
          compScore = compScore +2;
@@ -252,12 +255,13 @@ $.ajax({
          compScore = compScore +11;
         }
         console.log(compScore+" works1");
-        compScore = 20;
         victor(compScore)
+     }
     },
 },
 );
-}
+console.log(compScore+" works2")
+//}
 $("#compHand").append();
 }
 function victor(compScore){
