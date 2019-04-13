@@ -211,31 +211,31 @@ $.ajax({
       compCardImg = `<img class="handImg" src=${response.cards[0].image}\>`;
       compCardID = `${response.cards[0].value}`;
       $("#compHand").append(compCardImg);
-        if(compCardID === "2"){
+        if(compCardID === 2){
          compScore = compScore +2;
         } 
-        else if(compCardID === "3"){
+        else if(compCardID === 3){
          compScore = compScore +3;
         }
-        else if(compCardID === "4"){
+        else if(compCardID === 4){
          compScore = compScore +4;
         }
-        else if(compCardID === "5"){
+        else if(compCardID === 5){
          compScore = compScore +5;
         } 
-        else if(compCardID === "6"){
+        else if(compCardID === 6){
          compScore = compScore +6;
         } 
-        else if(compCardID === "7"){
+        else if(compCardID === 7){
          compScore = compScore +7;
         } 
-        else if(compCardID === "8"){
+        else if(compCardID === 8){
          compScore = compScore +8;
         } 
-        else if(compCardID === "9"){
+        else if(compCardID === 9){
          compScore = compScore +9;
         }
-        else if(compCardID === "0"){
+        else if(compCardID === 0){
          compScore = compScore +10;
         }
         else if(compCardID === "JACK"){
@@ -250,12 +250,11 @@ $.ajax({
         else if(compCardID === "ACE"){
          compScore = compScore +11;
         }
-        console.log(compScore)
+        console.log(compScore+" works1");
     },
 },
 );
-   
-compScore=20;
+
 $("#compHand").append();
 }
 console.log(compScore);
