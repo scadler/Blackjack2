@@ -200,6 +200,7 @@ if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
 $("#userPoints").text(userScore);
 
 function compDraw(deckID){
+ $(".compHandImg").remove();
  var compScore = 0;
  var compCardID = "";
  var compCardImg = "";
@@ -208,7 +209,7 @@ $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
     method: "GET",
     success: function(response){
-      compCardImg = `<img class="handImg" src=${response.cards[0].image}\>`;
+      compCardImg = `<img class="compHandImg" src=${response.cards[0].image}\>`;
       compCardID = `${response.cards[0].code}`;
       $("#compHand").append(compCardImg);
         if(compCardID === "2D" || compCardID === "2C" || compCardID === "2H" || compCardID === "2S"){
@@ -251,12 +252,15 @@ $.ajax({
          compScore = compScore +11;
         }
         console.log(compScore+" works1");
+        compScore = 20;
+        victor(compScore)
     },
 },
 );
-compScore = 20
+}
 $("#compHand").append();
 }
+function victor(compScore){
 console.log(compScore);
 var userPointsVal = Number($("#userPoints").text());
  if(userPointsVal > compScore && userPointsVal < 22){
