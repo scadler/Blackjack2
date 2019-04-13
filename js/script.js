@@ -2,10 +2,16 @@
 //!!!!!!!!!!!!!!!!!!!!!!!!
 //Fix the multiple image displaying bug
 //Fix the hit counter bug
+//(1/2)Use flexbox so that the computer cards and
+//(2/2)user cards are displayed side by side
 //!!!!!!!!!!!!!!!!!!!!!!!!
 var hand = ""
 var startClicked = false;
+var int = 0
 $("#start").click(function(){
+int = int+1;
+console.log(int+" yeeeeet");
+$(".face").remove();
 $("#winner").text("");
 $("#compPoints").text("");
 var userScore = 0;
@@ -19,7 +25,7 @@ var cardCScore = 0;
     method: "GET",
      success: function(response) {
          var deckID = `${response.deck_id}`;
-         console.log(deckID);
+         console.log("deckID "+deckID);
          getHand(deckID);
          hit(deckID);
          $("userPoints").text("help");
@@ -33,22 +39,18 @@ var cardCScore = 0;
 function getHand(deckID){
   var handZero = "";
   var handOne = "";
- console.log(deckID);
  $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=2",
     method: "GET",
     success: function(response){
-     handZero = `<img class="handImg" src=${response.cards[0].image}\>`;
-     handOne = `<img class="handImg" src=${response.cards[1].image}\>`;
+     handZero = `<img class="handImg, face" src=${response.cards[0].image}\>`;
+     handOne = `<img class="handImg, face" src=${response.cards[1].image}\>`;
      var cardA = `${response.cards[0].code}`;
      var cardB = `${response.cards[1].code}`;
-     console.log(cardA);
          $(".handImg").remove();
          $("#playerHand").append(handZero);
          $("#playerHand").append(handOne);
          var userScore = 0;
-         console.log(cardA);
-         console.log(cardB);
  if(cardA === "2D" ||cardA === "2C" ||cardA === "2H" ||cardA === "2S"){
   userScore = userScore +2;
  } 
@@ -130,8 +132,6 @@ function getHand(deckID){
  else if(cardB === "AD" ||cardB === "AC" ||cardB === "AH" ||cardB === "AS"){
   userScore = userScore +11;
  }
- console.log("func");
- console.log(userScore);
 $("#userPoints").text(userScore);
           }, 
 },
@@ -144,7 +144,6 @@ $("#instruction").click(function(){
 
 function hit(deckID){
 $("#hit").click(function(){
-console.log("hit");
 var userScoreHit = 0;
 var handTwo = "";
 var userPointsVal;
@@ -152,10 +151,10 @@ $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
     method: "GET",
     success: function(response){
-     handTwo = `<img class="handImg" src=${response.cards[0].image}\>`;
+     handTwo = `<img class="handImg, face" src=${response.cards[0].image}\>`;
      $("#playerHand").append(handTwo);
      var cardC = `${response.cards[0].code}`;
-if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
+ if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
   userScoreHit = userScoreHit +2;
  } 
  else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
@@ -201,7 +200,7 @@ if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
 )}
 );
 }
-$("#userPoints").text(userScore);
+//$("#userPoints").text(userScore);
 
 function compDraw(deckID){
  $(".compHandImg").remove();
@@ -216,7 +215,7 @@ $.ajax({
     success: function(response){
      while(compScore <16 && i < 8){
       i = i+1;
-      compCardImg = `<img class="compHandImg" src=${response.cards[i].image}\>`;
+      compCardImg = `<img class="compHandImg, face" src=${response.cards[i].image}\>`;
       compCardID = `${response.cards[i].code}`;
       $("#compHand").append(compCardImg);
         if(compCardID === "2D" || compCardID === "2C" || compCardID === "2H" || compCardID === "2S"){
@@ -258,89 +257,26 @@ $.ajax({
         else if(compCardID === "AD" || compCardID === "AC" || compCardID === "AH" || compCardID === "AS"){
          compScore = compScore +11;
         }
-        console.log(compScore+" works1");
-        victor(compScore)
+        victor(compScore);
      }
     },
 },
 );
-console.log(compScore+" works2")
 //}
 $("#compHand").append();
 }
 function victor(compScore){
-console.log(compScore);
 var userPointsVal = Number($("#userPoints").text());
  if(userPointsVal > compScore && userPointsVal < 22){
-  $("#winner").text("User");
+  $("#winner").text(", you won!");
   $("#compPoints").text("VS "+ compScore);
  }
  else if(userPointsVal < 22 && compScore > 21){
-  $("#winner").text("User");
+  $("#winner").text(", you won!");
   $("#compPoints").text("VS "+ compScore);
  }
  else{
-  $("#winner").text("Computer");
+  $("#winner").text(", the dealer won!");
   $("#compPoints").text(" VS "+ compScore);
  }
-}
-
-function placeholder(){
-  type = Math.ceil(Math.random()*3);
- value = Math.ceil(Math.random()*13)
-  compScore = compScore + value;
- if(value === 1){
-  value = "A";
- }
- if(value === 2){
-  value = "2";
- }
- if(value === 3){
-  value = "3";
- }
- if(value === 4){
-  value = "4";
- }
- if(value === 5){
-  value = "5";
- }
- if(value === 6){
-  value = "6";
- }
- if(value === 7){
-  value = "7";
- }
- if(value === 8){
-  value = "8";
- }
- if(value === 9){
-  value = "9";
- }
- if(value === 10){
-  value = "0";
- }
- if(value === 11){
-  value = "J";
- }
- if(value === 12){
-  value = "Q";
- }
- if(value === 13){
-  value = "K";
- }
- if(type === 1){
-  type = "D";
- }
- if(type === 2){
-  type = "C";
- }
- if(type === 3){
-  type = "H";
- }
- if(type === 4){
-  type = "S";
- }
- var cardId = value + type;
- console.log(cardId);
-//console.log"<img class='handImg' src='https://deckofcardsapi.com/static/img/'"+cardId+".png">
 }

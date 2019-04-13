@@ -19,11 +19,8 @@ body{
     background-color:white;
     border: solid 2px;
 }
-.handImg{
-    height:255.5px;
-    width:192px;
-}
-.compHandImg{
+
+.face{
     height:255.5px;
     width:192px;
 }
