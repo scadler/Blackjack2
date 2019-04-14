@@ -19,6 +19,7 @@ $(".ace").hide();
 $("#start").click(function(){
  click.stand = false;
  click.deal = true;
+ click.hit = false;
 int = int+1;
 $(".face").remove();
 $("#winner").text("");
@@ -156,8 +157,10 @@ $("#instruction").click(function(){
 });
 
 function hit(deckID){
- if(click.stand === false && click.deal === true){
-  $("#hit").click(function(){
+ $("#hit").click(function(){
+ if(click.stand === false && click.deal === true && click.hit === false){
+  click.hit = true;
+  console.log(click.stand+" yeet"); 
   var userScoreHit = 0;
   var handTwo = "";
   var userPointsVal;
@@ -209,11 +212,12 @@ function hit(deckID){
    }
    userPointsVal = Number($("#userPoints").text());
    $("#userPoints").text(userPointsVal + userScoreHit);
+   click.hit = false;
       },
   },
   )}
-  );
  }
+  );
 }
 
 function compDraw(deckID){
