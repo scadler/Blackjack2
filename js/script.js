@@ -5,8 +5,10 @@
 //(1/2)Use flexbox so that the computer cards and
 //(2/2)user cards are displayed side by side
 //!!!!!!!!!!!!!!!!!!!!!!!!
-var object={
- int: 0,
+var click={
+ deal: false,
+ stand: false,
+ hit: false,
 };
 var hand = ""
 var startClicked = false;
@@ -15,7 +17,8 @@ $(".ace").hide();
 
 
 $("#start").click(function(){
-$(".ace").hide();
+ click.stand = false;
+ click.deal = true;
 int = int+1;
 $(".face").remove();
 $("#winner").text("");
@@ -37,9 +40,12 @@ var cardCScore = 0;
          getHand(deckID);
          hit(deckID);
          $("userPoints").text("help");
-         $("#stand").click(function(){
-          compDraw(deckID);
-         });
+          $("#stand").click(function(){
+           if(click.stand === false){
+            click.stand = true;
+            compDraw(deckID);
+           }
+          });
      } 
  });
 });
@@ -150,64 +156,65 @@ $("#instruction").click(function(){
 });
 
 function hit(deckID){
-$("#hit").click(function(){
-var userScoreHit = 0;
-var handTwo = "";
-var userPointsVal;
-$.ajax({
-    url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
-    method: "GET",
-    success: function(response){
-     handTwo = `<img class="handImg, face" src=${response.cards[0].image}\>`;
-     $("#playerHand").append(handTwo);
-     var cardC = `${response.cards[0].code}`;
- if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
-  userScoreHit = userScoreHit +2;
- } 
- else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
-  userScoreHit = userScoreHit +3;
+ if(click.stand === false && click.deal === true){
+  $("#hit").click(function(){
+  var userScoreHit = 0;
+  var handTwo = "";
+  var userPointsVal;
+  $.ajax({
+      url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
+      method: "GET",
+      success: function(response){
+       handTwo = `<img class="handImg, face" src=${response.cards[0].image}\>`;
+        $("#playerHand").append(handTwo);
+       var cardC = `${response.cards[0].code}`;
+   if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
+    userScoreHit = userScoreHit +2;
+   } 
+   else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
+    userScoreHit = userScoreHit +3;
+   }
+  else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
+    userScoreHit = userScoreHit +4;
+   }
+   else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
+    userScoreHit = userScoreHit +5;
+   } 
+   else if(cardC === "6D" ||cardC === "6C" ||cardC === "6H" ||cardC === "6S"){
+    userScoreHit = userScoreHit +6;
+   } 
+   else if(cardC === "7D" ||cardC === "7C" ||cardC === "7H" ||cardC === "7S"){
+    userScoreHit = userScoreHit +7;
+   } 
+   else if(cardC === "8D" ||cardC === "8C" ||cardC === "8H" ||cardC === "8S"){
+    userScoreHit = userScoreHit +8;
+   } 
+   else if(cardC === "9D" ||cardC === "9C" ||cardC === "9H" ||cardC === "9S"){
+    userScoreHit = userScoreHit +9;
+   }
+   else if(cardC === "0D" ||cardC === "0C" ||cardC === "0H" ||cardC === "0S"){
+    userScoreHit = userScoreHit +10;
+   }
+   else if(cardC === "JD" ||cardC === "JC" ||cardC === "JH" ||cardC === "JS"){
+    userScoreHit = userScoreHit +10;
+   }
+   else if(cardC === "QD" ||cardC === "QC" ||cardC === "QH" ||cardC === "QS"){
+    userScoreHit = userScoreHit +10;
+   } 
+   else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
+    userScoreHit = userScoreHit +10;
+   } 
+   else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
+    userScoreHit = userScoreHit +11;
+   }
+   userPointsVal = Number($("#userPoints").text());
+   $("#userPoints").text(userPointsVal + userScoreHit);
+      },
+  },
+  )}
+  );
  }
- else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
-  userScoreHit = userScoreHit +4;
- }
- else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
-  userScoreHit = userScoreHit +5;
- } 
- else if(cardC === "6D" ||cardC === "6C" ||cardC === "6H" ||cardC === "6S"){
-  userScoreHit = userScoreHit +6;
- } 
- else if(cardC === "7D" ||cardC === "7C" ||cardC === "7H" ||cardC === "7S"){
-  userScoreHit = userScoreHit +7;
- } 
- else if(cardC === "8D" ||cardC === "8C" ||cardC === "8H" ||cardC === "8S"){
-  userScoreHit = userScoreHit +8;
- } 
- else if(cardC === "9D" ||cardC === "9C" ||cardC === "9H" ||cardC === "9S"){
-  userScoreHit = userScoreHit +9;
- }
- else if(cardC === "0D" ||cardC === "0C" ||cardC === "0H" ||cardC === "0S"){
-  userScoreHit = userScoreHit +10;
- }
- else if(cardC === "JD" ||cardC === "JC" ||cardC === "JH" ||cardC === "JS"){
-  userScoreHit = userScoreHit +10;
- }
- else if(cardC === "QD" ||cardC === "QC" ||cardC === "QH" ||cardC === "QS"){
-  userScoreHit = userScoreHit +10;
- } 
- else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
-  userScoreHit = userScoreHit +10;
- } 
- else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
-  userScoreHit = userScoreHit +11;
- }
- userPointsVal = Number($("#userPoints").text());
- $("#userPoints").text(userPointsVal + userScoreHit);
-    },
-},
-)}
-);
 }
-
 
 function compDraw(deckID){
  $(".compHandImg").remove();
@@ -293,7 +300,6 @@ $.ajax({
 },
 );
 }
-//}
 $("#compHand").append();
 function victor(compScore){
 var userPointsVal = Number($("#userPoints").text());
