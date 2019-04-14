@@ -51,8 +51,8 @@ function getHand(deckID){
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=2",
     method: "GET",
     success: function(response){
-     handZero = `<img class="handImg, face" src=${response.cards[0].image}\>`;
-     handOne = `<img class="handImg, face" src=${response.cards[1].image}\>`;
+     handZero = `<img class="handImg, face" id="cardA" src=${response.cards[0].image}\>`;
+     handOne = `<img class="handImg, face" id="cardB" src=${response.cards[1].image}\>`;
      var cardA = `${response.cards[0].code}`;
      var cardB = `${response.cards[1].code}`;
          $(".handImg").remove();
@@ -95,7 +95,16 @@ function getHand(deckID){
  else if(cardA === "KD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
   userScore = userScore +10;
  } 
- else if(cardA === "AD" ||cardA === "AC" ||cardA === "AH" ||cardA === "AS"){
+ else if(cardA === "AD"){
+  userScore = userScore +11;
+ }
+ else if(cardA === "AC"){
+  userScore = userScore +11;
+ }
+ else if(cardA === "AH"){
+  userScore = userScore +11;
+ }
+ else if(cardA === "AS"){
   userScore = userScore +11;
  }
  
