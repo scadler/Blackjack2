@@ -17,7 +17,6 @@ $(".ace").hide();
 $("#start").click(function(){
 $(".ace").hide();
 int = int+1;
-console.log(int+" yeeeeet");
 $(".face").remove();
 $("#winner").text("");
 $("#compPoints").text("");
@@ -95,16 +94,7 @@ function getHand(deckID){
  else if(cardA === "KD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
   userScore = userScore +10;
  } 
- else if(cardA === "AD"){
-  userScore = userScore +11;
- }
- else if(cardA === "AC"){
-  userScore = userScore +11;
- }
- else if(cardA === "AH"){
-  userScore = userScore +11;
- }
- else if(cardA === "AS"){
+ else if(cardA === "AD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
   userScore = userScore +11;
  }
  
@@ -218,7 +208,6 @@ $.ajax({
 );
 }
 
-//$("#userPoints").text(userScore);
 
 function compDraw(deckID){
  $(".compHandImg").remove();
@@ -226,7 +215,8 @@ function compDraw(deckID){
  var compCardID = "";
  var compCardImg = "";
  var i = -1;
-//while(compScore < 16){
+ var aceCounter = 0;
+ var aceFlipped = false;
 $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=8",
     method: "GET",
@@ -274,6 +264,28 @@ $.ajax({
         }
         else if(compCardID === "AD" || compCardID === "AC" || compCardID === "AH" || compCardID === "AS"){
          compScore = compScore +11;
+         aceCounter=aceCounter+1;
+         aceFlipped = false;
+        }
+        if(compScore-10<22 && compScore>21 && aceCounter>0 && aceFlipped === false){
+         console.log(compScore+" AA");
+         compScore = compScore-10;
+         console.log(compScore+" AB");
+         aceCounter = aceCounter-1;
+         console.log(aceCounter+" A");
+         console.log(aceFlipped+" AA");
+         aceFlipped=true;
+         console.log(aceFlipped+" AB");
+        }
+        else if(compScore+10<22 && aceCounter>0 && aceFlipped === true){
+         console.log(compScore+" BA");
+         compScore = compScore+10;
+         console.log(compScore+" BB");
+         aceCounter = aceCounter-1;
+         console.log(aceCounter+" B");
+         console.log(aceFlipped+" BA");
+         aceFlipped=false;
+         console.log(aceFlipped+" BB");
         }
         victor(compScore);
      }
