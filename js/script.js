@@ -5,18 +5,27 @@
 //(1/2)Use flexbox so that the computer cards and
 //(2/2)user cards are displayed side by side
 //!!!!!!!!!!!!!!!!!!!!!!!!
+var object={
+ int: 0,
+};
 var hand = ""
 var startClicked = false;
 var int = 0
+$(".ace").hide();
+
+
 $("#start").click(function(){
+$(".ace").hide();
 int = int+1;
 console.log(int+" yeeeeet");
 $(".face").remove();
 $("#winner").text("");
 $("#compPoints").text("");
+var userScoreHit = 0;
 var userScore = 0;
 var handZero = "";
 var handOne = "";
+var handTwo = "";
 var cardAScore = 0;
 var cardBScore = 0;
 var cardCScore = 0;
@@ -35,7 +44,6 @@ var cardCScore = 0;
      } 
  });
 });
-
 function getHand(deckID){
   var handZero = "";
   var handOne = "";
@@ -200,6 +208,7 @@ $.ajax({
 )}
 );
 }
+
 //$("#userPoints").text(userScore);
 
 function compDraw(deckID){
@@ -262,9 +271,9 @@ $.ajax({
     },
 },
 );
+}
 //}
 $("#compHand").append();
-}
 function victor(compScore){
 var userPointsVal = Number($("#userPoints").text());
  if(userPointsVal > compScore && userPointsVal < 22){
