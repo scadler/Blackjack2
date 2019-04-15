@@ -100,12 +100,12 @@ function getHand(deckID){
  }
  $("#cardA").click(function(){
  var userScore = Number($("#userPoints").text());
- if(aceA.drew === true && aceA.flip === false){
+ if(aceA.drew === true && aceA.flip === false && click.stand === false){
   aceA.flip = true;
   userScore = userScore-10;
   $("#userPoints").text(userScore);
  }
- else if(aceA.drew === true && aceA.flip === true){
+ else if(aceA.drew === true && aceA.flip === true && click.stand === false){
   aceA.flip = false;
   userScore = userScore+10;
   $("#userPoints").text(userScore);
@@ -153,12 +153,12 @@ function getHand(deckID){
  }
  $("#cardB").click(function(){
  var userScore = Number($("#userPoints").text());
- if(aceB.drew === true && aceB.flip === false){
+ if(aceB.drew === true && aceB.flip === false && click.stand === false){
   aceB.flip = true;
   userScore = userScore-10;
   $("#userPoints").text(userScore);
  }
- else if(aceB.drew === true && aceB.flip === true){
+ else if(aceB.drew === true && aceB.flip === true && click.stand === false){
   aceB.flip = false;
   userScore = userScore+10;
   $("#userPoints").text(userScore);
@@ -213,49 +213,55 @@ function hit(deckID){
       url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
       method: "GET",
       success: function(response){
-       handTwo = `<img class="handImg, face, cardC" id="cardC" src=${response.cards[0].image}\>`;
-        $("#playerHand").append(handTwo);
        var cardC = `${response.cards[0].code}`;
-   if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
-    userScoreHit = userScoreHit +2;
-   } 
-   else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
-    userScoreHit = userScoreHit +3;
-   }
-   else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
-    userScoreHit = userScoreHit +4;
-   }
-   else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
-    userScoreHit = userScoreHit +5;
-   } 
-   else if(cardC === "6D" ||cardC === "6C" ||cardC === "6H" ||cardC === "6S"){
-    userScoreHit = userScoreHit +6;
-   } 
-   else if(cardC === "7D" ||cardC === "7C" ||cardC === "7H" ||cardC === "7S"){
-    userScoreHit = userScoreHit +7;
-   } 
-   else if(cardC === "8D" ||cardC === "8C" ||cardC === "8H" ||cardC === "8S"){
-    userScoreHit = userScoreHit +8;
-   } 
-   else if(cardC === "9D" ||cardC === "9C" ||cardC === "9H" ||cardC === "9S"){
-    userScoreHit = userScoreHit +9;
-   }
-   else if(cardC === "0D" ||cardC === "0C" ||cardC === "0H" ||cardC === "0S"){
-    userScoreHit = userScoreHit +10;
-   }
-   else if(cardC === "JD" ||cardC === "JC" ||cardC === "JH" ||cardC === "JS"){
-    userScoreHit = userScoreHit +10;
-   }
-   else if(cardC === "QD" ||cardC === "QC" ||cardC === "QH" ||cardC === "QS"){
-    userScoreHit = userScoreHit +10;
-   } 
-   else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
-    userScoreHit = userScoreHit +10;
-   } 
-   else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
-    userScoreHit = userScoreHit +11;
-    aceC.drew = true;
-   }
+       if(cardC != "AD" && cardC != "AC" && cardC != "AH" && cardC != "AS"){
+        handTwo = `<img class="handImg, face, cardC" src=${response.cards[0].image}\>`;
+        $("#playerHand").append(handTwo);
+       }
+       else{
+        if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
+         userScoreHit = userScoreHit +2;
+        } 
+        else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
+         userScoreHit = userScoreHit +3;
+        }
+        else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
+         userScoreHit = userScoreHit +4;
+        }
+        else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
+         userScoreHit = userScoreHit +5;
+        } 
+        else if(cardC === "6D" ||cardC === "6C" ||cardC === "6H" ||cardC === "6S"){
+         userScoreHit = userScoreHit +6;
+        } 
+        else if(cardC === "7D" ||cardC === "7C" ||cardC === "7H" ||cardC === "7S"){
+         userScoreHit = userScoreHit +7;
+        } 
+        else if(cardC === "8D" ||cardC === "8C" ||cardC === "8H" ||cardC === "8S"){
+         userScoreHit = userScoreHit +8;
+        } 
+        else if(cardC === "9D" ||cardC === "9C" ||cardC === "9H" ||cardC === "9S"){
+         userScoreHit = userScoreHit +9;
+        }
+        else if(cardC === "0D" ||cardC === "0C" ||cardC === "0H" ||cardC === "0S"){
+         userScoreHit = userScoreHit +10;
+        }
+        else if(cardC === "JD" ||cardC === "JC" ||cardC === "JH" ||cardC === "JS"){
+         userScoreHit = userScoreHit +10;
+        }
+        else if(cardC === "QD" ||cardC === "QC" ||cardC === "QH" ||cardC === "QS"){
+         userScoreHit = userScoreHit +10;
+        } 
+        else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
+         userScoreHit = userScoreHit +10;
+        } 
+        else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
+         handTwo = `<img class="handImg, face, cardC" id="cardC" src=${response.cards[0].image}\>`;
+        $("#playerHand").append(handTwo);
+         userScoreHit = userScoreHit +11;
+         aceC.drew = true;
+        }
+       }
    userPointsVal = Number($("#userPoints").text());
    $("#userPoints").text(userPointsVal + userScoreHit);
    click.hit = false;
@@ -264,13 +270,13 @@ function hit(deckID){
     console.log(aceC.drew);
     console.log(aceC.flip);
    var userScore = Number($("#userPoints").text());
-   if(aceC.drew === true && aceC.flip === false){
+   if(aceC.drew === true && aceC.flip === false  && click.stand === false){
     aceC.flip = true;
     console.log("worksA");
     userScore = userScore-10;
     $("#userPoints").text(userScore);
    }
-   else if(aceC.drew === true && aceC.flip === true){
+   else if(aceC.drew === true && aceC.flip === true  && click.stand === false){
     aceC.flip = false;
     userScore = userScore+10;
     $("#userPoints").text(userScore);
