@@ -17,12 +17,44 @@ var aceB={
  drew: false,
 };
 var aceC={
- flip: false,
- drew: false,
-};
+ step:[{ flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    { flip: false, drew: false, },
+    
+ ],
+}
 var hand = ""
 var startClicked = false;
-
+var i = 0
 $("#start").click(function(){
  reset();
     $.ajax({
@@ -181,8 +213,7 @@ function reset(){
  aceA.drew = false;
  aceB.flip = false;
  aceB.drew = false;
- aceC.flip = false,
- aceC.drew = false,
+ i = 0;
  $(".face").remove();
  $(".cardC").remove();
  $("#winner").text("");
@@ -195,6 +226,11 @@ function reset(){
  var cardAScore = 0;
  var cardBScore = 0;
  var cardCScore = 0;
+ while(i > 32){
+  cardC.step[i].flip = false;
+  cardC.step[i].drew = false;
+  console.log(i);
+ }
 }
 
 $("#instruction").click(function(){
@@ -218,7 +254,7 @@ function hit(deckID){
         handTwo = `<img class="handImg, face, cardC" src=${response.cards[0].image}\>`;
         $("#playerHand").append(handTwo);
        }
-       else{
+       cardC = `${response.cards[0].code}`;
         if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
          userScoreHit = userScoreHit +2;
         } 
@@ -256,31 +292,33 @@ function hit(deckID){
          userScoreHit = userScoreHit +10;
         } 
         else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
-         handTwo = `<img class="handImg, face, cardC" id="cardC" src=${response.cards[0].image}\>`;
+         i = i + 1;
+         handTwo = `<img class="handImg, face, cardC" id="${i}" src=${response.cards[0].image}\>`;
         $("#playerHand").append(handTwo);
+        console.log(handTwo);
          userScoreHit = userScoreHit +11;
-         aceC.drew = true;
+ //        aceC.drew = true;
         }
-       }
+       
    userPointsVal = Number($("#userPoints").text());
    $("#userPoints").text(userPointsVal + userScoreHit);
    click.hit = false;
    $(".cardC").click(function(){
     console.log("works");
-    console.log(aceC.drew);
-    console.log(aceC.flip);
+//    console.log(aceC.drew);
+ //   console.log(aceC.flip);
    var userScore = Number($("#userPoints").text());
-   if(aceC.drew === true && aceC.flip === false  && click.stand === false){
-    aceC.flip = true;
+ //  if(aceC.drew === true && aceC.flip === false  && click.stand === false){
+ //   aceC.flip = true;
     console.log("worksA");
     userScore = userScore-10;
     $("#userPoints").text(userScore);
-   }
-   else if(aceC.drew === true && aceC.flip === true  && click.stand === false){
-    aceC.flip = false;
+  // }
+ //  else if(aceC.drew === true && aceC.flip === true  && click.stand === false){
+  //  aceC.flip = false;
     userScore = userScore+10;
     $("#userPoints").text(userScore);
-   }
+ //  }
    });
       },
   },
@@ -379,3 +417,17 @@ var userPointsVal = Number($("#userPoints").text());
   $("#compPoints").text(" VS "+ compScore);
  }
 }
+
+$("#cardB").click(function(i){
+ var userScore = Number($("#userPoints").text());
+// if(aceC[i].drew === true && aceC[i].flip === false && click.stand === false){
+  //aceC[i].flip = true;
+  userScore = userScore-10;
+  $("#userPoints").text(userScore);
+// }
+ //else if(aceB.drew === true && aceB.flip === true && click.stand === false){
+  aceB.flip = false;
+  userScore = userScore+10;
+  $("#userPoints").text(userScore);
+ //}
+});
