@@ -1,7 +1,5 @@
 /* global $ */
 //!!!!!!!!!!!!!!!!!!!!!!!!
-//Fix the multiple image displaying bug
-//Fix the hit counter bug
 //(1/2)Use flexbox so that the computer cards and
 //(2/2)user cards are displayed side by side
 //!!!!!!!!!!!!!!!!!!!!!!!!
@@ -10,28 +8,23 @@ var click={
  stand: false,
  hit: false,
 };
+var aceA={
+ flip: false,
+ drew: false,
+};
+var aceB={
+ flip: false,
+ drew: false,
+};
+var aceC={
+ flip: false,
+ drew: false,
+};
 var hand = ""
 var startClicked = false;
-var int = 0
-$(".ace").hide();
-
 
 $("#start").click(function(){
- click.stand = false;
- click.deal = true;
- click.hit = false;
-int = int+1;
-$(".face").remove();
-$("#winner").text("");
-$("#compPoints").text("");
-var userScoreHit = 0;
-var userScore = 0;
-var handZero = "";
-var handOne = "";
-var handTwo = "";
-var cardAScore = 0;
-var cardBScore = 0;
-var cardCScore = 0;
+ reset();
     $.ajax({
     url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8",
     method: "GET",
@@ -101,12 +94,23 @@ function getHand(deckID){
  else if(cardA === "KD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
   userScore = userScore +10;
  } 
- else if(cardA === "AD" ||cardA === "KC" ||cardA === "KH" ||cardA === "KS"){
+ else if(cardA === "AD" ||cardA === "AC" ||cardA === "AH" ||cardA === "AS"){
   userScore = userScore +11;
+  aceA.drew = true;
  }
- 
- 
- 
+ $("#cardA").click(function(){
+ var userScore = Number($("#userPoints").text());
+ if(aceA.drew === true && aceA.flip === false){
+  aceA.flip = true;
+  userScore = userScore-10;
+  $("#userPoints").text(userScore);
+ }
+ else if(aceA.drew === true && aceA.flip === true){
+  aceA.flip = false;
+  userScore = userScore+10;
+  $("#userPoints").text(userScore);
+ }
+});
  if(cardB === "2D" || cardB === "2C" || cardB === "2H" || cardB === "2S"){
   userScore = userScore +2;
  } 
@@ -145,12 +149,53 @@ function getHand(deckID){
  } 
  else if(cardB === "AD" ||cardB === "AC" ||cardB === "AH" ||cardB === "AS"){
   userScore = userScore +11;
+  aceB.drew = true;
  }
+ $("#cardB").click(function(){
+ var userScore = Number($("#userPoints").text());
+ if(aceB.drew === true && aceB.flip === false){
+  aceB.flip = true;
+  userScore = userScore-10;
+  $("#userPoints").text(userScore);
+ }
+ else if(aceB.drew === true && aceB.flip === true){
+  aceB.flip = false;
+  userScore = userScore+10;
+  $("#userPoints").text(userScore);
+ }
+});
 $("#userPoints").text(userScore);
           }, 
 },
 
 )}
+
+
+
+
+function reset(){
+ click.stand = false;
+ click.deal = true;
+ click.hit = false;
+ aceA.flip = false;
+ aceA.drew = false;
+ aceB.flip = false;
+ aceB.drew = false;
+ aceC.flip = false,
+ aceC.drew = false,
+ $(".face").remove();
+ $(".cardC").remove();
+ $("#winner").text("");
+ $("#compPoints").text("");
+ var userScoreHit = 0;
+ var userScore = 0;
+ var handZero = "";
+ var handOne = "";
+ var handTwo = "";
+ var cardAScore = 0;
+ var cardBScore = 0;
+ var cardCScore = 0;
+}
 
 $("#instruction").click(function(){
  $("#instruction").alert("The rules are as follow");
@@ -168,7 +213,7 @@ function hit(deckID){
       url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=1",
       method: "GET",
       success: function(response){
-       handTwo = `<img class="handImg, face" src=${response.cards[0].image}\>`;
+       handTwo = `<img class="handImg, face, cardC" id="cardC" src=${response.cards[0].image}\>`;
         $("#playerHand").append(handTwo);
        var cardC = `${response.cards[0].code}`;
    if(cardC === "2D" || cardC === "2C" || cardC === "2H" || cardC === "2S"){
@@ -177,7 +222,7 @@ function hit(deckID){
    else if(cardC === "3D" || cardC === "3C" || cardC === "3H" || cardC === "3S"){
     userScoreHit = userScoreHit +3;
    }
-  else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
+   else if(cardC === "4D" || cardC === "4C" || cardC === "4H" || cardC === "4S"){
     userScoreHit = userScoreHit +4;
    }
    else if(cardC === "5D" ||cardC === "5C" ||cardC === "5H" ||cardC === "5S"){
@@ -209,10 +254,28 @@ function hit(deckID){
    } 
    else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
     userScoreHit = userScoreHit +11;
+    aceC.drew = true;
    }
    userPointsVal = Number($("#userPoints").text());
    $("#userPoints").text(userPointsVal + userScoreHit);
    click.hit = false;
+   $(".cardC").click(function(){
+    console.log("works");
+    console.log(aceC.drew);
+    console.log(aceC.flip);
+   var userScore = Number($("#userPoints").text());
+   if(aceC.drew === true && aceC.flip === false){
+    aceC.flip = true;
+    console.log("worksA");
+    userScore = userScore-10;
+    $("#userPoints").text(userScore);
+   }
+   else if(aceC.drew === true && aceC.flip === true){
+    aceC.flip = false;
+    userScore = userScore+10;
+    $("#userPoints").text(userScore);
+   }
+   });
       },
   },
   )}
@@ -232,7 +295,7 @@ $.ajax({
     url: "https://deckofcardsapi.com/api/deck/"+ deckID +"/draw/?count=8",
     method: "GET",
     success: function(response){
-     while(compScore <16 && i < 8){
+     while(compScore <17 && i < 8){
       i = i+1;
       compCardImg = `<img class="compHandImg, face" src=${response.cards[i].image}\>`;
       compCardID = `${response.cards[i].code}`;
@@ -279,24 +342,14 @@ $.ajax({
          aceFlipped = false;
         }
         if(compScore-10<22 && compScore>21 && aceCounter>0 && aceFlipped === false){
-         console.log(compScore+" AA");
          compScore = compScore-10;
-         console.log(compScore+" AB");
          aceCounter = aceCounter-1;
-         console.log(aceCounter+" A");
-         console.log(aceFlipped+" AA");
          aceFlipped=true;
-         console.log(aceFlipped+" AB");
         }
         else if(compScore+10<22 && aceCounter>0 && aceFlipped === true){
-         console.log(compScore+" BA");
          compScore = compScore+10;
-         console.log(compScore+" BB");
          aceCounter = aceCounter-1;
-         console.log(aceCounter+" B");
-         console.log(aceFlipped+" BA");
          aceFlipped=false;
-         console.log(aceFlipped+" BB");
         }
         victor(compScore);
      }
