@@ -16,15 +16,21 @@ var aceB={
  flip: false,
  drew: false,
 };
-var aceC={ flip: false,
-           drew: false,
+var aceC={
+ flipD: false,
+ drewD: false,
+ flipC: false,
+ drewC: false,
+ flipH: false,
+ drewH: false,
+ flipS: false,
+ drewS: false,
 };
 var hand = ""
 var startClicked = false;
-var i = 0;
+var i = "";
 $("#start").click(function(){
  i = 1;
- console.log("#"+i);
  reset();
     $.ajax({
     url: "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=8",
@@ -182,9 +188,15 @@ function reset(){
  aceA.drew = false;
  aceB.flip = false;
  aceB.drew = false;
- aceC.flip = false,
- aceC.drew = false,
- i = 0;
+ aceC.flipD = false,
+ aceC.drewD = false,
+ aceC.flipC = false,
+ aceC.drewC = false,
+ aceC.flipH = false,
+ aceC.drewH = false,
+ aceC.flipS = false,
+ aceC.drewS = false,
+ i = "a";
  $(".face").remove();
  $(".cardC").remove();
  $("#winner").text("");
@@ -257,9 +269,9 @@ function hit(deckID){
         else if(cardC === "KD" ||cardC === "KC" ||cardC === "KH" ||cardC === "KS"){
          userScoreHit = userScoreHit +10;
         } 
-        else if(cardC === "AD" ||cardC === "AC" ||cardC === "AH" ||cardC === "AS"){
-         i = i + 1;
-         handTwo = `<img class="handImg, face, cardC" id="${i}"+D src=${response.cards[0].image}\>`;
+        else if(cardC === "AD"){
+         i = i+1;
+         handTwo = `<img class="ace" id="aceD" src=${response.cards[0].image}\>`;
         $("#playerHand").append(handTwo);
         console.log(handTwo);
          userScoreHit = userScoreHit +11;
@@ -384,8 +396,11 @@ var userPointsVal = Number($("#userPoints").text());
  }
 }
 
-$("'#"+{i}+"'").click(function(i){
+$("").click(function(){
+ console.log("ace works");
  var userScore = Number($("#userPoints").text());
+ var i = $(".ace").attr('id');
+ console.log(i);
  if(aceC[i].drew === true && aceC[i].flip === false && click.stand === false){
   aceC[i].flip = true;
   userScore = userScore-10;
