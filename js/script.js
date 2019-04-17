@@ -25,8 +25,7 @@ var aceC = {
  drewS: false,
 };
 var aces = {
- 
- 
+
 };
 var hand = ""
 var startClicked = false;
