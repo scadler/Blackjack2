@@ -5,9 +5,23 @@
     padding: 20px;
 }
 
+.table{
+    padding-top:20px;
+}
+
 .page{
     padding-top:50px;
     padding:20px;
+}
+
+.playerSide{
+    width:50%;
+    float:left;
+}
+
+.compSide{
+    width:50%;
+    float:right;
 }
 
 body{
@@ -17,7 +31,23 @@ body{
 
 .button{
     background-color:white;
+    border-radius: 10px;
     border: solid 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    margin-left: 20px;
+    
+}
+
+.active, .button:hover {
+  background-color: #aaaaaa;
+  color: white
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
 }
 
 .face{
@@ -33,3 +63,6 @@ body{
     width:136.64px;
 }
 
+.text{
+    color:black;
+}

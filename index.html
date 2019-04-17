@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-    
     <head>
         <title> BlackJack </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -9,18 +8,22 @@
     <body>
         <div class="page">
             <div class="header">
-                <button class="button" id="start">Deal</button>
-                <button class="button" id="hit">Hit</button>
-                <button class="button" id="stand">Stay</button>
-                <button class="button" id="instuction">How To Play</button>
+                <div class="buttons">
+                    <button class="button" id="start">Deal</button>
+                    <button class="button" id="hit">Hit</button>
+                    <button class="button" id="stand">Stay</button>
+                    <button class="button" onclick="window.location.href = 'howtoplay.html'";>How to Play</button>
+                </div>
+            </div>
+            <div class="table">
+                <h1 id="userHTML" class="text"> Value: <span id="userPoints">0</span> <span id="compPoints"></span><span id="winner"></span></h1>
+                <div class="sides">
+                    <div id="playerHand" class="playerSide"></div>
+                    <div id="compHand" class="compSide"></div>
+                </div>
+                <h1><span id="winner"></span></h1>
             </div>
         </div>
-        <h1 id="userHTML"> Value: <span id="userPoints">0</span> <span id="compPoints"></span><span id="winner"></span></h1>
-        <div id="playerHand">
-        </div>
-        <div id="compHand">
-        </div>
-        <h1><span id="winner"></span></h1>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Your Javascript -->
         <script src="js/script.js"></script>
