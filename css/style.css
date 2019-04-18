@@ -4,29 +4,23 @@
     border-radius:10px;
     padding: 20px;
 }
-
 .table{
     padding-top:20px;
 }
-
 .page{
     padding-top:50px;
     padding:20px;
 }
-
 .playerSide{
     width:50%;
     float:left;
 }
-
 .compSide{
     width:50%;
     float:right;
 }
-
 body{
     background-color:#308834;
-    
 }
 
 .button{
@@ -39,12 +33,10 @@ body{
     margin-left: 20px;
     
 }
-
 .active, .button:hover {
   background-color: #aaaaaa;
   color: white
 }
-
 .buttons{
     display:flex;
     justify-content:center;
@@ -62,7 +54,6 @@ body{
     height:171.28px;
     width:123.28px;
 }
-
 .text{
     color:black;
 }

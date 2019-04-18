@@ -37,6 +37,7 @@ var compScoreObject = {
 var hand = ""
 var startClicked = false;
 var i = "";
+// 1, Start Button, establishes deck and runs functions///////////////////////////////////////////////////////////////////////////////////////////////////
 $("#start").click(function() {
  i = 1;
  reset();
@@ -59,6 +60,7 @@ $("#start").click(function() {
   }
  });
 });
+// 2, Deals the starting computer hand/////////////////////////////////////////////////////////////////////////////////////////////////
 function compDeal(deckID) {
  var compHand = "";
  $.ajax({
@@ -117,6 +119,7 @@ function compDeal(deckID) {
  },
  );
 }
+// 3, Deals starting player hand/////////////////////////////////////////////////////////////////////////////////////////////////
 function getHand(deckID) {
  var handZero = "";
  var handOne = "";
@@ -247,13 +250,9 @@ function getHand(deckID) {
     $("#userPoints").text(userScore);
    },
   },
-
  )
 }
-
-
-
-
+// 4, Resets all variables/////////////////////////////////////////////////////////////////////////////////////////////////
 function reset() {
  click.stand = false;
  click.deal = true;
@@ -265,14 +264,14 @@ function reset() {
  aceB.flip = false;
  aceB.drew = false;
  aceC.flipD = false,
-  aceC.drewD = false,
-  aceC.flipC = false,
-  aceC.drewC = false,
-  aceC.flipH = false,
-  aceC.drewH = false,
-  aceC.flipS = false,
-  aceC.drewS = false,
-  aceCounter.numFlipped = 0,
+ aceC.drewD = false,
+ aceC.flipC = false,
+ aceC.drewC = false,
+ aceC.flipH = false,
+ aceC.drewH = false,
+ aceC.flipS = false,
+ aceC.drewS = false,
+ aceCounter.numFlipped = 0,
  compScoreObject.compScore = 0,
   i = 0;
  $(".face").remove();
@@ -290,8 +289,7 @@ function reset() {
  var cardBScore = 0;
  var cardCScore = 0;
 }
-
-
+// 5, Gives player additional cards/////////////////////////////////////////////////////////////////////////////////////////////////
 function hit(deckID) {
  $("#hit").click(function() {
   if (click.stand === false && click.deal === true && click.hit === false && click.bust === false) {
@@ -380,19 +378,14 @@ function hit(deckID) {
       aceC.drew = true;
       bust();
      }
-
-
      userPointsVal = Number($("#userPoints").text());
      $("#userPoints").text(userPointsVal + userScoreHit);
      bust();
      click.hit = false;
      $(".cardC").click(function() {
-      //  console.log("worksC");
-
       var userScore = Number($("#userPoints").text());
       if (aceC.drew === true && aceC.flip === false && click.stand === false) {
        aceC.flip = true;
-       //  console.log("worksA");
        userScore = userScore - 10;
        $("#userPoints").text(userScore);
       }
@@ -407,7 +400,7 @@ function hit(deckID) {
   }
  });
 }
-
+// 6, Computer rules for playing/////////////////////////////////////////////////////////////////////////////////////////////////
 function compDraw(deckID) {
  $(".compHandImg").remove();
   $("#compCardBack").remove();
@@ -483,7 +476,7 @@ function compDraw(deckID) {
  }, );
 }
 $("#compHand").append();
-
+// 7, function decides who won/////////////////////////////////////////////////////////////////////////////////////////////////
 function victor(compScore) {
  var userPointsVal = Number($("#userPoints").text());
  if (userPointsVal > compScore && userPointsVal < 22) {
@@ -499,8 +492,8 @@ function victor(compScore) {
   $("#compPoints").text(" VS " + compScore);
  }
 }
-
-function bust(){
+// 8, function detects if player busted/////////////////////////////////////////////////////////////////////////////////////////////////
+function bust(deckID){
  var num=aceCounter.numFlipped*10;
  if(Number($("#userPoints").text())-num > 21 && Number($("#userPoints").text())>21){
   click.bust = true;
