@@ -5,6 +5,8 @@ var click = {
  hit: false,
  ace: false,
  bust: false,
+ won: false,
+ cardNum: 2,
 };
 var counterD1 = 0;
 var aceA = {
@@ -34,6 +36,7 @@ var aceCounter = {
 var compScoreObject = {
  compScore: 0,
 };
+var chips = 100;
 var hand = ""
 var startClicked = false;
 var i = "";
@@ -50,7 +53,6 @@ $("#start").click(function() {
    getHand(deckID);
    hit(deckID);
    compDeal(deckID);
-   $("userPoints").text("help");
    $("#stand").click(function() {
     if (click.stand === false && click.bust === false) {
      click.stand = true;
@@ -69,9 +71,9 @@ function compDeal(deckID) {
    success: function(response) {
     compHand = `<img class="compHandImg, face" id="compCardA" src=${response.cards[0].image}\>`;
     var compCardA = `${response.cards[0].code}`;
-    var compCardBack = `<img class="compHandImgBack, face" id="compCardBack" src="https://i.imgur.com/ttV7m0M.png"\>`
+    var compCardBack = `<img class="compHandImgBack, face" id="compCardBack" src="https://i.imgur.com/ttV7m0M.png"\>`;
     $(".compHandImg").remove();
-    $("#compHand").append(compHand)
+    $("#compHand").append(compHand);
     $("#compHand").append(compCardBack);
     ;
     var compScoreA = 0
@@ -250,10 +252,12 @@ function getHand(deckID) {
     $("#userPoints").text(userScore);
    },
   },
- )
+ );
 }
 // 4, Resets all variables/////////////////////////////////////////////////////////////////////////////////////////////////
 function reset() {
+ click.cardNum = 2,
+ click.won = false;
  click.stand = false;
  click.deal = true;
  click.hit = false;
@@ -294,6 +298,7 @@ function hit(deckID) {
  $("#hit").click(function() {
   if (click.stand === false && click.deal === true && click.hit === false && click.bust === false) {
    click.hit = true;
+   click.cardNum = click.cardNum + 1;
    console.log(click.stand);
    var userScoreHit = 0;
    var handTwo = "";
@@ -478,18 +483,36 @@ function compDraw(deckID) {
 $("#compHand").append();
 // 7, function decides who won/////////////////////////////////////////////////////////////////////////////////////////////////
 function victor(compScore) {
+ var score = Number($("#userPoints").text());
+ console.log(score);
+ if(click.cardNum === 2 && click.won === false && score === 21 && compScore != 21){
+  console.log("blackjack");
+  chips = Number($("#money").text());
+  chips = chips + 10;
+  $("#money").text(chips);
+  click.won = true;
+ }
  var userPointsVal = Number($("#userPoints").text());
  if (userPointsVal > compScore && userPointsVal < 22) {
   $("#winner").text(", you won!");
   $("#compPoints").text("VS " + compScore);
+  won();
  }
  else if (userPointsVal < 22 && compScore > 21) {
   $("#winner").text(", you won!");
+  $("#compPoints").text("VS " + compScore);
+  won();
+ }
+ else if (compScore === 21) {
+  $("#winner").text(", the dealer won!");
   $("#compPoints").text("VS " + compScore);
  }
  else {
   $("#winner").text(", the dealer won!");
   $("#compPoints").text(" VS " + compScore);
+  chips = Number($("#money").text());
+  chips = chips - 5;
+  $("#money").text(chips);
  }
 }
 // 8, function detects if player busted/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -499,5 +522,24 @@ function bust(deckID){
   click.bust = true;
   $("#comma").text(",");
   $("#compPoints").text("the dealer won!");
+  chips = Number($("#money").text());
+  chips = chips - 5;
+  $("#money").text(chips);
+ }
+}
+function won(){
+ if(click.won === false){
+ chips = Number($("#money").text());
+ chips = chips + 5;
+ $("#money").text(chips);
+ click.won = true;
+ }
+}
+function blackjack(){
+ if(click.won === false){
+ chips = Number($("#money").text());
+ chips = chips + 10;
+ $("#money").text(chips);
+ click.won = true;
  }
 }
