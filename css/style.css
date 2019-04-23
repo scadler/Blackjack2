@@ -14,6 +14,15 @@
     padding:20px;
 }
 
+.footer{
+    display:flex;
+    justify-content:center;
+}
+
+.sides{
+    padding-top: 60px;
+}
+
 .playerSide{
     width:50%;
     float:left;
@@ -26,6 +35,7 @@
 #valueDiv{
     width:70%;
     float:left;
+    padding-left:100px;
 }
 #moneyDiv{
     width:30%;
@@ -72,4 +82,16 @@ body{
 
 .text{
     color:black;
+}
+
+.howtoplayTitle{
+    text-align:center;
+}
+
+.instructions{
+    font-size:20px;
+}
+
+.hand{
+    font-size:25px;
 }

@@ -5,19 +5,28 @@
         <link type="text/css" rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <div class="header">
-            <h1 class="text">How to Play</h1>
+        <div class="page">
+            <div class="header">
+                <h1 class="howtoplayTitle text">How to Play</h1>
+            </div>
+            <div class="table">
+                <div class="instructions">
+                    <p class="text">Each player is dealt 2 cards. Your cards are on the left while the dealer's are on the right. The objective of this game
+                    is to get as close as possible to 21 points without going over 21 points.
+                    Cards 2-10 are worth face value, face cards are worth 10 points, aces can
+                    be worth 1 or 11 points. To change the value of an ace click on it. A blackjack is when the first two cards that you are dealt are an ace along with any face card.</p>
+                    <p class="text">After "Deal" is clicked you are dealt two cards. When
+                    "Hit" is click you are dealt an additional card per click.
+                    A score that is more than 21 points results in an immediate loss.
+                    After "Stay" is clicked the dealer's turn starts.
+                    </p>
+                    <p class="text">If you beat the computer you get $5. If the dealer wins you lose $5. If you get a blackjack you win $10.</p>
+                </div>
+            </div>
         </div>
-        <p class="text">Each player is dealt 2 cards. The objective of this game
-        is to get as close as possible to 21 points without going over 21 points.
-        Cards 2-10 are worth face value, face cards are worth 10 points, aces can
-        be worth 1 or 11 points.</p>
-        <p class="text">After "Deal" is clicked you are dealt two cards. When
-        "Hit" is click you are dealt an additional card per click.
-        A score that is more than 21 points results in am immediate loss.
-        After "Stay" is clicked the dealer's turn starts.</p>
-        <p class="text">If you beat the computer you get $5. If the dealer wins you lose $5. If you get a blackjack you win $10.</p>
-        <button class="button" onclick="window.location.href = 'index.html';">Back</button>
+        <div class="footer">
+            <button id="backtoGame" class="button" onclick="window.location.href = 'index.html';">Back to Game</button>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- Your Javascript -->
         <script src="js/script.js"></script>

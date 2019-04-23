@@ -528,6 +528,21 @@ $("#compHand").append();
 function victor(compScore) {
  chips = Number($("#money").text());
  var userPointsVal = Number($("#userPoints").text());
+ var score = Number($("#userPoints").text());
+ var blackjack = black.jack;
+ if(click.cardNum === 2 && click.won === false){
+  if(blackjack === "faceace" || blackjack === "aceface"){
+   console.log("blackjack");
+   chips = Number($("#money").text());
+   chips = chips + 10;
+   $("#money").text(chips);
+   click.won = true;
+   click.blackjack = true;
+   blackjack = "";
+   $("#compPoints").text("");
+   $("#winner").text("Blackjack, you won!");
+  }
+ }
  if (userPointsVal > compScore && userPointsVal < 22) {
   $("#winner").text(", you won!");
   $("#compPoints").text("VS " + compScore);
@@ -542,19 +557,10 @@ function victor(compScore) {
   var userWon = true;
   won(userWon);
  }
- // else if(compScore > userPointsVal && compScore < 22 && run === false){
- //  run = true;
- //  $("#winner").text(", the dealer won!");
- //  $("#compPoints").text(" VS " + compScore);
- //  chips = Number($("#money").text());
- //  chips = chips - 5;
- //  console.log(chips);
- //  $("#money").text(chips);
- //  console.log("yeetyaw2");
- // }
  else if(run === false){
   var blackjack = black.jack;
-  if(blackjack != "faceace" && blackjack != "aceface"){
+  console.log(black.jack)
+  if(black.jack != "faceace" && blackjack != "aceface" && click.blackjack === false){
   $("#winner").text(", the dealer won!");
   $("#compPoints").text(" VS " + compScore);
   var compWon = true;
@@ -586,8 +592,21 @@ function lost(compWon){
  click.won = true;
 }
 function won(userWon){
+  var userPointsVal = Number($("#userPoints").text());
+   var compScore = Number($("#compPoints").text());
+   console.log(compScore)
  if(click.won === false && userWon === true){
+  if(userPointsVal > compScore && userPointsVal < 22){
  userWon = false;
+ chips = Number($("#money").text());
+ chips = chips + 5;
+ $("#money").text(chips);
+ click.won = true;
+ }
+ click.won = true;
+ }
+ else if(userPointsVal < 22 && compScore > 21){
+  userWon = false;
  chips = Number($("#money").text());
  chips = chips + 5;
  $("#money").text(chips);
@@ -599,7 +618,7 @@ function won(userWon){
 function blackjack(){
  var score = Number($("#userPoints").text());
  var blackjack = black.jack;
- if(click.cardNum === 2 && click.won === false && score === 21){
+ if(click.cardNum === 2 && click.won === false){
   if(blackjack === "faceace" || blackjack === "aceface"){
    console.log("blackjack");
    chips = Number($("#money").text());
@@ -608,8 +627,8 @@ function blackjack(){
    click.won = true;
    click.blackjack = true;
    blackjack = "";
-   $("#compPoints").text(", ");
-   $("#winner").text("you won!");
+   $("#compPoints").text("");
+   $("#winner").text("Blackjack, you won!");
   }
  }
 }
