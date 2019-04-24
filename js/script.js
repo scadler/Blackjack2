@@ -48,6 +48,48 @@ var hand = ""
 var startClicked = false;
 var i = "";
 var run = false;
+
+function getScore(card){
+    if (card === "2D" || card === "2C" || card === "2H" || card === "2S") {
+     return 2;
+    }
+    else if (card === "3D" || card === "3C" || card === "3H" || card === "3S") {
+     return 3;
+    }
+    else if (card === "4D" || card === "4C" || card === "4H" || card === "4S") {
+     return 4;
+    }
+    else if (card === "5D" || card === "5C" || card === "5H" || card === "5S") {
+     return 5;
+    }
+    else if (card === "6D" || card === "6C" || card === "6H" || card === "6S") {
+     return 6;
+    }
+    else if (card === "7D" || card === "7C" || card === "7H" || card === "7S") {
+     return 7;
+    }
+    else if (card === "8D" || card === "8C" || card === "8H" || card === "8S") {
+     return 8;
+    }
+    else if (card === "9D" || card === "9C" || card === "9H" || card === "9S") {
+     return 9;
+    }
+    else if (card === "0D" || card === "0C" || card === "0H" || card === "0S") {
+     return 10;
+    }
+    else if (card === "JD" || card === "JC" || card === "JH" || card === "JS") {
+     return 10;
+    }
+    else if (card === "QD" || card === "QC" || card === "QH" || card === "QS") {
+     return 10;
+    }
+    else if (card === "KD" || card === "KC" || card === "KH" || card === "KS") {
+     return 10;
+    }
+    else if (card === "AD" || card === "AC" || card === "AH" || card === "AS") {
+     return 11;
+    }
+}
 // 1, Deal Button, establishes deck and runs functions///////////////////////////////////////////////////////////////////////////////////////////////////
 $("#start").click(function() {
  i = 1;
@@ -85,59 +127,8 @@ function compDeal(deckID) {
     $("#compHand").append(compHand);
     $("#compHand").append(compCardBack);
     var compScoreA = 0;
-    if (compCardA === "2D" || compCardA === "2C" || compCardA === "2H" || compCardA === "2S") {
-     compScoreA = compScoreA + 2;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "3D" || compCardA === "3C" || compCardA === "3H" || compCardA === "3S") {
-     compScoreA = compScoreA + 3;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "4D" || compCardA === "4C" || compCardA === "4H" || compCardA === "4S") {
-     compScoreA = compScoreA + 4;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "5D" || compCardA === "5C" || compCardA === "5H" || compCardA === "5S") {
-     compScoreA = compScoreA + 5;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "6D" || compCardA === "6C" || compCardA === "6H" || compCardA === "6S") {
-     compScoreA = compScoreA + 6;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "7D" || compCardA === "7C" || compCardA === "7H" || compCardA === "7S") {
-     compScoreA = compScoreA + 7;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "8D" || compCardA === "8C" || compCardA === "8H" || compCardA === "8S") {
-     compScoreA = compScoreA + 8;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "9D" || compCardA === "9C" || compCardA === "9H" || compCardA === "9S") {
-     compScoreA = compScoreA + 9;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "0D" || compCardA === "0C" || compCardA === "0H" || compCardA === "0S") {
-     compScoreA = compScoreA + 10;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "JD" || compCardA === "JC" || compCardA === "JH" || compCardA === "JS") {
-     compScoreA = compScoreA + 10;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "QD" || compCardA === "QC" || compCardA === "QH" || compCardA === "QS") {
-     compScoreA = compScoreA + 10;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "KD" || compCardA === "KC" || compCardA === "KH" || compCardA === "KS") {
-     compScoreA = compScoreA + 10;
-     comp.score = compScoreA;
-    }
-    else if (compCardA === "AD" || compCardA === "AC" || compCardA === "AH" || compCardA === "AS") {
-     compScoreA = compScoreA + 11;
-     comp.score = compScoreA;
-    }
-    compScoreObject.compScore = compScoreA;
+    comp.score = getScore(compCardA);
+    compScoreObject.compScore=comp.score;
    },
  },
  );
@@ -158,34 +149,7 @@ function getHand(deckID) {
     $("#playerHand").append(handZero);
     $("#playerHand").append(handOne);
     var userScore = 0;
-    if (cardA === "2D" || cardA === "2C" || cardA === "2H" || cardA === "2S") {
-     userScore = userScore + 2;
-    }
-    else if (cardA === "3D" || cardA === "3C" || cardA === "3H" || cardA === "3S") {
-     userScore = userScore + 3;
-    }
-    else if (cardA === "4D" || cardA === "4C" || cardA === "4H" || cardA === "4S") {
-     userScore = userScore + 4;
-    }
-    else if (cardA === "5D" || cardA === "5C" || cardA === "5H" || cardA === "5S") {
-     userScore = userScore + 5;
-    }
-    else if (cardA === "6D" || cardA === "6C" || cardA === "6H" || cardA === "6S") {
-     userScore = userScore + 6;
-    }
-    else if (cardA === "7D" || cardA === "7C" || cardA === "7H" || cardA === "7S") {
-     userScore = userScore + 7;
-    }
-    else if (cardA === "8D" || cardA === "8C" || cardA === "8H" || cardA === "8S") {
-     userScore = userScore + 8;
-    }
-    else if (cardA === "9D" || cardA === "9C" || cardA === "9H" || cardA === "9S") {
-     userScore = userScore + 9;
-    }
-    else if (cardA === "0D" || cardA === "0C" || cardA === "0H" || cardA === "0S") {
-     userScore = userScore + 10;
-    }
-    else if (cardA === "JD" || cardA === "JC" || cardA === "JH" || cardA === "JS") {
+    if (cardA === "JD" || cardA === "JC" || cardA === "JH" || cardA === "JS") {
      userScore = userScore + 10;
      black.jack = black.jack + "face";
     }
@@ -203,6 +167,10 @@ function getHand(deckID) {
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
      black.jack = black.jack + "ace";
     }
+    else {
+    userScore = getScore(cardA);
+    }
+    
     $("#cardA").click(function() {
      var userScore = Number($("#userPoints").text());
      if (aceA.drew === true && aceA.flip === false && click.stand === false) {
@@ -218,34 +186,7 @@ function getHand(deckID) {
       aceCounter.numFlipped = aceCounter.numFlipped + 1;
      }
     });
-    if (cardB === "2D" || cardB === "2C" || cardB === "2H" || cardB === "2S") {
-     userScore = userScore + 2;
-    }
-    else if (cardB === "3D" || cardB === "3C" || cardB === "3H" || cardB === "3S") {
-     userScore = userScore + 3;
-    }
-    else if (cardB === "4D" || cardB === "4C" || cardB === "4H" || cardB === "4S") {
-     userScore = userScore + 4;
-    }
-    else if (cardB === "5D" || cardB === "5C" || cardB === "5H" || cardB === "5S") {
-     userScore = userScore + 5;
-    }
-    else if (cardB === "6D" || cardB === "6C" || cardB === "6H" || cardB === "6S") {
-     userScore = userScore + 6;
-    }
-    else if (cardB === "7D" || cardB === "7C" || cardB === "7H" || cardB === "7S") {
-     userScore = userScore + 7;
-    }
-    else if (cardB === "8D" || cardB === "8C" || cardB === "8H" || cardB === "8S") {
-     userScore = userScore + 8;
-    }
-    else if (cardB === "9D" || cardB === "9C" || cardB === "9H" || cardB === "9S") {
-     userScore = userScore + 9;
-    }
-    else if (cardB === "0D" || cardB === "0C" || cardB === "0H" || cardB === "0S") {
-     userScore = userScore + 10;
-    }
-    else if (cardB === "JD" || cardB === "JC" || cardB === "JH" || cardB === "JS") {
+    if (cardB === "JD" || cardB === "JC" || cardB === "JH" || cardB === "JS") {
      userScore = userScore + 10;
      black.jack = black.jack + "face";
     }
@@ -262,6 +203,9 @@ function getHand(deckID) {
      aceB.drew = true;
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
      black.jack = black.jack + "ace";
+    }
+    else {
+     userScore = getScore(cardB);
     }
     $("#cardB").click(function() {
      var userScore = Number($("#userPoints").text());
@@ -453,59 +397,14 @@ function compDraw(deckID) {
     compCardImg = `<img class="compHandImg, face" src=${response.cards[i].image}\>`;
     compCardID = `${response.cards[i].code}`;
     $("#compHand").append(compCardImg);
-    if (compCardID === "2D" || compCardID === "2C" || compCardID === "2H" || compCardID === "2S") {
-     compScore = compScore + 2;
-     comp.score = compScore;
-    }
-    else if (compCardID === "3D" || compCardID === "3C" || compCardID === "3H" || compCardID === "3S") {
-     compScore = compScore + 3;
-     comp.score = compScore;
-    }
-    else if (compCardID === "4D" || compCardID === "4C" || compCardID === "4H" || compCardID === "4S") {
-     compScore = compScore + 4;
-     comp.score = compScore;
-    }
-    else if (compCardID === "5D" || compCardID === "5C" || compCardID === "5H" || compCardID === "5S") {
-     compScore = compScore + 5;
-     comp.score = compScore;
-    }
-    else if (compCardID === "6D" || compCardID === "6C" || compCardID === "6H" || compCardID === "6S") {
-     compScore = compScore + 6;
-     comp.score = compScore;
-    }
-    else if (compCardID === "7D" || compCardID === "7C" || compCardID === "7H" || compCardID === "7S") {
-     compScore = compScore + 7;
-     comp.score = compScore;
-    }
-    else if (compCardID === "8D" || compCardID === "8C" || compCardID === "8H" || compCardID === "8S") {
-     compScore = compScore + 8;
-     comp.score = compScore;
-    }
-    else if (compCardID === "9D" || compCardID === "9C" || compCardID === "9H" || compCardID === "9S") {
-     compScore = compScore + 9;
-     comp.score = compScore;
-    }
-    else if (compCardID === "0D" || compCardID === "0C" || compCardID === "0H" || compCardID === "0S") {
-     compScore = compScore + 10;
-     comp.score = compScore;
-    }
-    else if (compCardID === "JD" || compCardID === "JC" || compCardID === "JH" || compCardID === "JS") {
-     compScore = compScore + 10;
-     comp.score = compScore;
-    }
-    else if (compCardID === "QD" || compCardID === "QC" || compCardID === "QH" || compCardID === "QS") {
-     compScore = compScore + 10;
-     comp.score = compScore;
-    }
-    else if (compCardID === "KD" || compCardID === "KC" || compCardID === "KH" || compCardID === "KS") {
-     compScore = compScore + 10;
-     comp.score = compScore;
-    }
-    else if (compCardID === "AD" || compCardID === "AC" || compCardID === "AH" || compCardID === "AS") {
+    if (compCardID === "AD" || compCardID === "AC" || compCardID === "AH" || compCardID === "AS") {
      compScore = compScore + 11;
      comp.score = compScore;
      aceCounter = aceCounter + 1;
      aceFlipped = false;
+    }
+    else {
+     compScore = compScore + getScore(compCardID);
     }
     if (compScore - 10 < 22 && compScore > 21 && aceCounter > 0 && aceFlipped === false) {
      compScore = compScore - 10;
