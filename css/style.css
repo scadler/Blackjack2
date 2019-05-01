@@ -20,7 +20,7 @@
 }
 
 .sides{
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
 .playerSide{
@@ -33,9 +33,8 @@
     float:right;
 }
 #valueDiv{
-    width:70%;
-    float:left;
-    padding-left:100px;
+    display: flex;
+    justify-content: center;
 }
 #moneyDiv{
     width:30%;
@@ -59,12 +58,16 @@ body{
 
 .active, .button:hover {
   background-color: #aaaaaa;
-  color: white
+  color: white;
+  -webkit-transition-duration: 0.5s;
+    transition-duration: 0.3s;
 }
 
 .buttons{
     display:flex;
     justify-content:center;
+    font-family: 'Norican', cursive;
+    font-size:22px;
 }
 
 .face{
@@ -81,11 +84,16 @@ body{
 }
 
 .text{
+    font-size:25;
     color:black;
+    font-family: 'Norican', cursive;
 }
 
 .howtoplayTitle{
     text-align:center;
+    font-family: 'Norican', cursive;
+    color: white;
+    
 }
 
 .instructions{
@@ -94,4 +102,15 @@ body{
 
 .hand{
     font-size:25px;
+}
+
+#backtoGame{
+    font-family: 'Norican', cursive;
+}
+
+.one{
+   font-family: 'Artifika', serif;
+    font-size:24px;
+    
+    
 }

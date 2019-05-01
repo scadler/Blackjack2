@@ -38,10 +38,10 @@ var compScoreObject = {
  compScore: 0,
 };
 var black = {
- jack:"",
+ jack: "",
 };
 var comp = {
- score:0,
+ score: 0,
 };
 var chips = 100;
 var hand = ""
@@ -49,46 +49,46 @@ var startClicked = false;
 var i = "";
 var run = false;
 
-function getScore(card){
-    if (card === "2D" || card === "2C" || card === "2H" || card === "2S") {
-     return 2;
-    }
-    else if (card === "3D" || card === "3C" || card === "3H" || card === "3S") {
-     return 3;
-    }
-    else if (card === "4D" || card === "4C" || card === "4H" || card === "4S") {
-     return 4;
-    }
-    else if (card === "5D" || card === "5C" || card === "5H" || card === "5S") {
-     return 5;
-    }
-    else if (card === "6D" || card === "6C" || card === "6H" || card === "6S") {
-     return 6;
-    }
-    else if (card === "7D" || card === "7C" || card === "7H" || card === "7S") {
-     return 7;
-    }
-    else if (card === "8D" || card === "8C" || card === "8H" || card === "8S") {
-     return 8;
-    }
-    else if (card === "9D" || card === "9C" || card === "9H" || card === "9S") {
-     return 9;
-    }
-    else if (card === "0D" || card === "0C" || card === "0H" || card === "0S") {
-     return 10;
-    }
-    else if (card === "JD" || card === "JC" || card === "JH" || card === "JS") {
-     return 10;
-    }
-    else if (card === "QD" || card === "QC" || card === "QH" || card === "QS") {
-     return 10;
-    }
-    else if (card === "KD" || card === "KC" || card === "KH" || card === "KS") {
-     return 10;
-    }
-    else if (card === "AD" || card === "AC" || card === "AH" || card === "AS") {
-     return 11;
-    }
+function getScore(card) {
+ if (card === "2D" || card === "2C" || card === "2H" || card === "2S") {
+  return 2;
+ }
+ else if (card === "3D" || card === "3C" || card === "3H" || card === "3S") {
+  return 3;
+ }
+ else if (card === "4D" || card === "4C" || card === "4H" || card === "4S") {
+  return 4;
+ }
+ else if (card === "5D" || card === "5C" || card === "5H" || card === "5S") {
+  return 5;
+ }
+ else if (card === "6D" || card === "6C" || card === "6H" || card === "6S") {
+  return 6;
+ }
+ else if (card === "7D" || card === "7C" || card === "7H" || card === "7S") {
+  return 7;
+ }
+ else if (card === "8D" || card === "8C" || card === "8H" || card === "8S") {
+  return 8;
+ }
+ else if (card === "9D" || card === "9C" || card === "9H" || card === "9S") {
+  return 9;
+ }
+ else if (card === "0D" || card === "0C" || card === "0H" || card === "0S") {
+  return 10;
+ }
+ else if (card === "JD" || card === "JC" || card === "JH" || card === "JS") {
+  return 10;
+ }
+ else if (card === "QD" || card === "QC" || card === "QH" || card === "QS") {
+  return 10;
+ }
+ else if (card === "KD" || card === "KC" || card === "KH" || card === "KS") {
+  return 10;
+ }
+ else if (card === "AD" || card === "AC" || card === "AH" || card === "AS") {
+  return 11;
+ }
 }
 // 1, Deal Button, establishes deck and runs functions///////////////////////////////////////////////////////////////////////////////////////////////////
 $("#start").click(function() {
@@ -117,115 +117,113 @@ $("#start").click(function() {
 function compDeal(deckID) {
  var compHand = "";
  $.ajax({
-   url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=1",
-   method: "GET",
-   success: function(response) {
-    compHand = `<img class="compHandImg, face" id="compCardA" src=${response.cards[0].image}\>`;
-    var compCardA = `${response.cards[0].code}`;
-    var compCardBack = `<img class="compHandImgBack, face" id="compCardBack" src="https://i.imgur.com/ttV7m0M.png"\>`;
-    $(".compHandImg").remove();
-    $("#compHand").append(compHand);
-    $("#compHand").append(compCardBack);
-    var compScoreA = 0;
-    comp.score = getScore(compCardA);
-    compScoreObject.compScore=comp.score;
-   },
- },
- );
+  url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=1",
+  method: "GET",
+  success: function(response) {
+   compHand = `<img class="compHandImg, face" id="compCardA" src=${response.cards[0].image}\>`;
+   var compCardA = `${response.cards[0].code}`;
+   var compCardBack = `<img class="compHandImgBack, face" id="compCardBack" src="https://i.imgur.com/ttV7m0M.png"\>`;
+   $(".compHandImg").remove();
+   $("#compHand").append(compHand);
+   $("#compHand").append(compCardBack);
+   var compScoreA = 0;
+   comp.score = getScore(compCardA);
+   compScoreObject.compScore = comp.score;
+  },
+ }, );
 }
 // 3, Deals starting player hand/////////////////////////////////////////////////////////////////////////////////////////////////
 function getHand(deckID) {
  var handZero = "";
  var handOne = "";
  $.ajax({
-   url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=2",
-   method: "GET",
-   success: function(response) {
-    handZero = `<img class="handImg, face" id="cardA" src=${response.cards[0].image}\>`;
-    handOne = `<img class="handImg, face" id="cardB" src=${response.cards[1].image}\>`;
-    var cardA = `${response.cards[0].code}`;
-    var cardB = `${response.cards[1].code}`;
-    $(".handImg").remove();
-    $("#playerHand").append(handZero);
-    $("#playerHand").append(handOne);
-    var userScore = 0;
-    if (cardA === "JD" || cardA === "JC" || cardA === "JH" || cardA === "JS") {
-     userScore = userScore + 10;
-     black.jack = black.jack + "face";
+  url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=2",
+  method: "GET",
+  success: function(response) {
+   handZero = `<img class="handImg, face" id="cardA" src=${response.cards[0].image}\>`;
+   handOne = `<img class="handImg, face" id="cardB" src=${response.cards[1].image}\>`;
+   var cardA = `${response.cards[0].code}`;
+   var cardB = `${response.cards[1].code}`;
+   $(".handImg").remove();
+   $("#playerHand").append(handZero);
+   $("#playerHand").append(handOne);
+   var userScore = 0;
+   if (cardA === "JD" || cardA === "JC" || cardA === "JH" || cardA === "JS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardA === "QD" || cardA === "QC" || cardA === "QH" || cardA === "QS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardA === "KD" || cardA === "KC" || cardA === "KH" || cardA === "KS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardA === "AD" || cardA === "AC" || cardA === "AH" || cardA === "AS") {
+    userScore = userScore + 11;
+    aceA.drew = true;
+    aceCounter.numFlipped = aceCounter.numFlipped + 1;
+    black.jack = black.jack + "ace";
+   }
+   else {
+    userScore = userScore + getScore(cardA);
+   }
+
+   $("#cardA").click(function() {
+    var userScore = Number($("#userPoints").text());
+    if (aceA.drew === true && aceA.flip === false && click.stand === false) {
+     aceA.flip = true;
+     userScore = userScore - 10;
+     $("#userPoints").text(userScore);
+     aceCounter.numFlipped = aceCounter.numFlipped - 1;
     }
-    else if (cardA === "QD" || cardA === "QC" || cardA === "QH" || cardA === "QS") {
+    else if (aceA.drew === true && aceA.flip === true && click.stand === false) {
+     aceA.flip = false;
      userScore = userScore + 10;
-     black.jack = black.jack + "face";
-    }
-    else if (cardA === "KD" || cardA === "KC" || cardA === "KH" || cardA === "KS") {
-     userScore = userScore + 10;
-     black.jack = black.jack + "face";
-    }
-    else if (cardA === "AD" || cardA === "AC" || cardA === "AH" || cardA === "AS") {
-     userScore = userScore + 11;
-     aceA.drew = true;
+     $("#userPoints").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
-     black.jack = black.jack + "ace";
     }
-    else {
-    userScore = getScore(cardA);
+   });
+   if (cardB === "JD" || cardB === "JC" || cardB === "JH" || cardB === "JS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardB === "QD" || cardB === "QC" || cardB === "QH" || cardB === "QS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardB === "KD" || cardB === "KC" || cardB === "KH" || cardB === "KS") {
+    userScore = userScore + 10;
+    black.jack = black.jack + "face";
+   }
+   else if (cardB === "AD" || cardB === "AC" || cardB === "AH" || cardB === "AS") {
+    userScore = userScore + 11;
+    aceB.drew = true;
+    aceCounter.numFlipped = aceCounter.numFlipped + 1;
+    black.jack = black.jack + "ace";
+   }
+   else {
+    userScore = userScore + getScore(cardB);
+   }
+   $("#cardB").click(function() {
+    var userScore = Number($("#userPoints").text());
+    if (aceB.drew === true && aceB.flip === false && click.stand === false) {
+     aceB.flip = true;
+     userScore = userScore - 10;
+     $("#userPoints").text(userScore);
+     aceCounter.numFlipped = aceCounter.numFlipped - 1;
     }
-    
-    $("#cardA").click(function() {
-     var userScore = Number($("#userPoints").text());
-     if (aceA.drew === true && aceA.flip === false && click.stand === false) {
-      aceA.flip = true;
-      userScore = userScore - 10;
-      $("#userPoints").text(userScore);
-      aceCounter.numFlipped = aceCounter.numFlipped - 1;
-     }
-     else if (aceA.drew === true && aceA.flip === true && click.stand === false) {
-      aceA.flip = false;
-      userScore = userScore + 10;
-      $("#userPoints").text(userScore);
-      aceCounter.numFlipped = aceCounter.numFlipped + 1;
-     }
-    });
-    if (cardB === "JD" || cardB === "JC" || cardB === "JH" || cardB === "JS") {
+    else if (aceB.drew === true && aceB.flip === true && click.stand === false) {
+     aceB.flip = false;
      userScore = userScore + 10;
-     black.jack = black.jack + "face";
-    }
-    else if (cardB === "QD" || cardB === "QC" || cardB === "QH" || cardB === "QS") {
-     userScore = userScore + 10;
-     black.jack = black.jack + "face";
-    }
-    else if (cardB === "KD" || cardB === "KC" || cardB === "KH" || cardB === "KS") {
-     userScore = userScore + 10;
-     black.jack = black.jack + "face";
-    }
-    else if (cardB === "AD" || cardB === "AC" || cardB === "AH" || cardB === "AS") {
-     userScore = userScore + 11;
-     aceB.drew = true;
+     $("#userPoints").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
-     black.jack = black.jack + "ace";
     }
-    else {
-     userScore = getScore(cardB);
-    }
-    $("#cardB").click(function() {
-     var userScore = Number($("#userPoints").text());
-     if (aceB.drew === true && aceB.flip === false && click.stand === false) {
-      aceB.flip = true;
-      userScore = userScore - 10;
-      $("#userPoints").text(userScore);
-      aceCounter.numFlipped = aceCounter.numFlipped - 1;
-     }
-     else if (aceB.drew === true && aceB.flip === true && click.stand === false) {
-      aceB.flip = false;
-      userScore = userScore + 10;
-      $("#userPoints").text(userScore);
-      aceCounter.numFlipped = aceCounter.numFlipped + 1;
-     }
-    });
-    $("#userPoints").text(userScore);
-   },
+   });
+   $("#userPoints").text(userScore);
   },
- );
+ }, );
 }
 // 4, Resets all variables/////////////////////////////////////////////////////////////////////////////////////////////////
 function reset() {
@@ -235,7 +233,7 @@ function reset() {
  click.blackjack = false;
  black.jack = "";
  click.cardNum = 2,
- click.won = false;
+  click.won = false;
  click.stand = false;
  click.deal = true;
  click.hit = false;
@@ -246,20 +244,20 @@ function reset() {
  aceB.flip = false;
  aceB.drew = false;
  aceC.flipD = false,
- aceC.drewD = false,
- aceC.flipC = false,
- aceC.drewC = false,
- aceC.flipH = false,
- aceC.drewH = false,
- aceC.flipS = false,
- aceC.drewS = false,
- aceCounter.numFlipped = 0,
- compScoreObject.compScore = 0,
- run = false;
-  i = 0;
+  aceC.drewD = false,
+  aceC.flipC = false,
+  aceC.drewC = false,
+  aceC.flipH = false,
+  aceC.drewH = false,
+  aceC.flipS = false,
+  aceC.drewS = false,
+  aceCounter.numFlipped = 0,
+  compScoreObject.compScore = 0,
+  run = false;
+ i = 0;
  $(".face").remove();
  $(".cardC").remove();
-  $(".ace").remove();
+ $(".ace").remove();
  $("#winner").text("");
  $("#compPoints").text("");
  $("#comma").text("");
@@ -332,7 +330,7 @@ function hit(deckID) {
       aceCounter.numFlipped = aceCounter.numFlipped + 1;
       handTwo = `<img class="ace" id="ace-${i}" src=${response.cards[0].image}\>`;
       var cardImg = $("#playerHand").append(handTwo);
-       aces[`ace-${i}`] = true;
+      aces[`ace-${i}`] = true;
       bust();
       $(`#ace-${i}`).click(function() {
        var aceID = $(this).attr('id');
@@ -381,7 +379,7 @@ function hit(deckID) {
 // 6, Computer rules for playing/////////////////////////////////////////////////////////////////////////////////////////////////
 function compDraw(deckID) {
  $(".compHandImg").remove();
-  $("#compCardBack").remove();
+ $("#compCardBack").remove();
  var compScore = compScoreObject.compScore;
  var compCardID = "";
  var compCardImg = "";
@@ -416,7 +414,7 @@ function compDraw(deckID) {
      aceCounter = aceCounter - 1;
      aceFlipped = false;
     }
-    victor(compScore)
+    victor(compScore);
    }
   },
  }, );
@@ -429,8 +427,8 @@ function victor(compScore) {
  var userPointsVal = Number($("#userPoints").text());
  var score = Number($("#userPoints").text());
  var blackjack = black.jack;
- if(click.cardNum === 2 && click.won === false){
-  if(blackjack === "faceace" || blackjack === "aceface"){
+ if (click.cardNum === 2 && click.won === false) {
+  if (blackjack === "faceace" || blackjack === "aceface") {
    console.log("blackjack");
    chips = Number($("#money").text());
    chips = chips + 10;
@@ -444,81 +442,92 @@ function victor(compScore) {
  }
  if (userPointsVal > compScore && userPointsVal < 22) {
   $("#winner").text(", you won!");
-  $("#compPoints").text("VS " + compScore);
+  $("#comma").text(" VS ")
+  $("#compPoints").text(compScore);
   var userWon = true;
-  won(userWon);
+  won(userWon, compScore);
  }
  else if (userPointsVal < 22 && compScore > 21 && run === false && click.blackjack === false) {
   run = true;
   $("#winner").text(", you won!");
-  $("#compPoints").text("VS " + compScore);
-  console.log("user2");
+  $("#comma").text(" VS ")
+  $("#compPoints").text(compScore);
   var userWon = true;
-  won(userWon);
+  won(userWon, compScore);
  }
- else if(run === false){
-  var blackjack = black.jack;
-  console.log(black.jack)
-  if(black.jack != "faceace" && blackjack != "aceface" && click.blackjack === false){
+ else if (userPointsVal === compScore && run === false) {
   $("#winner").text(", the dealer won!");
-  $("#compPoints").text(" VS " + compScore);
+  $("#comma").text(" VS ")
+  $("#compPoints").text(compScore);
   var compWon = true;
   lost(compWon);
+ }
+ else if (run === false) {
+  var blackjack = black.jack;
+  if (black.jack != "faceace" && blackjack != "aceface" && click.blackjack === false) {
+   $("#winner").text(", the dealer won!");
+   $("#compPoints").text(" VS " + compScore);
+   var compWon = true;
+   lost(compWon);
   }
  }
 }
 // 8, function detects if player busted/////////////////////////////////////////////////////////////////////////////////////////////////
-function bust(deckID){
- var num=aceCounter.numFlipped*10;
- if(Number($("#userPoints").text())-num > 21 && Number($("#userPoints").text())>21){
+function bust(deckID) {
+ var num = aceCounter.numFlipped * 10;
+ if (Number($("#userPoints").text()) - num > 21 && Number($("#userPoints").text()) > 21) {
   click.bust = true;
   $("#comma").text(",");
   $("#compPoints").text("the dealer won!");
   chips = Number($("#money").text());
   chips = chips - 5;
-  $("#money").text(chips);
+  $("#money").text(chips + " chips");
  }
 }
-function lost(compWon){
- if(click.won === false && compWon === true){
+
+function lost(compWon) {
+ if (click.won === false && compWon === true) {
   compWon = false;
   chips = Number($("#money").text());
   chips = chips - 5;
-  console.log(chips);
+  console.log(chips + " chips");
   $("#money").text(chips);
   click.won = true;
  }
  click.won = true;
 }
-function won(userWon){
-  var userPointsVal = Number($("#userPoints").text());
-   var compScore = Number($("#compPoints").text());
-   console.log(compScore)
- if(click.won === false && userWon === true){
-  if(userPointsVal > compScore && userPointsVal < 22){
- userWon = false;
- chips = Number($("#money").text());
- chips = chips + 5;
- $("#money").text(chips);
- click.won = true;
+
+function won(userWon, compScore) {
+ var userPointsVal = Number($("#userPoints").text());
+ var compScore = Number($("#compPoints").text());
+ console.log(compScore);
+ if (click.won === false && userWon === true) {
+  if (userPointsVal > compScore && userPointsVal < 22) {
+   userWon = false;
+   chips = Number($("#money").text());
+   chips = chips + 5;
+   $("#money").text(chips);
+   click.won = true;
+   console.log(compScore + " compscore");
+  }
+  click.won = true;
  }
- click.won = true;
- }
- else if(userPointsVal < 22 && compScore > 21){
+ else if (click.won === true && userPointsVal < 22 && compScore > 21) {
   userWon = false;
- chips = Number($("#money").text());
- chips = chips + 5;
- $("#money").text(chips);
- click.won = true;
-}
+  chips = Number($("#money").text());
+  chips = chips + 5;
+  $("#money").text(chips);
+  click.won = true;
+  console.log(compScore + " compscore");
+ }
  click.won = true;
 }
 
-function blackjack(){
+function blackjack() {
  var score = Number($("#userPoints").text());
  var blackjack = black.jack;
- if(click.cardNum === 2 && click.won === false){
-  if(blackjack === "faceace" || blackjack === "aceface"){
+ if (click.cardNum === 2 && click.won === false) {
+  if (blackjack === "faceace" || blackjack === "aceface") {
    console.log("blackjack");
    chips = Number($("#money").text());
    chips = chips + 10;
