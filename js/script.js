@@ -437,7 +437,7 @@ function victor(compScore) {
    click.blackjack = true;
    blackjack = "";
    $("#compPoints").text("");
-   $("#winner").text("Blackjack, you won!");
+   $("#winner").text(", you won!");
   }
  }
  if (userPointsVal > compScore && userPointsVal < 22) {
@@ -457,7 +457,7 @@ function victor(compScore) {
  }
  else if (userPointsVal === compScore && run === false) {
   $("#winner").text(", the dealer won!");
-  $("#comma").text(" VS ")
+  $("#comma").text(" VS ");
   $("#compPoints").text(compScore);
   var compWon = true;
   lost(compWon);
@@ -466,7 +466,8 @@ function victor(compScore) {
   var blackjack = black.jack;
   if (black.jack != "faceace" && blackjack != "aceface" && click.blackjack === false) {
    $("#winner").text(", the dealer won!");
-   $("#compPoints").text(" VS " + compScore);
+   $("#comma").text(" VS ");
+   $("#compPoints").text(compScore);
    var compWon = true;
    lost(compWon);
   }
@@ -536,7 +537,7 @@ function blackjack() {
    click.blackjack = true;
    blackjack = "";
    $("#compPoints").text("");
-   $("#winner").text("Blackjack, you won!");
+   $("#winner").text(", you won!");
   }
  }
 }
