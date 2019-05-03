@@ -129,6 +129,7 @@ function compDeal(deckID) {
    var compScoreA = 0;
    comp.score = getScore(compCardA);
    compScoreObject.compScore = comp.score;
+   $("#compPoints2").text(compScoreObject.compScore+"?");
   },
  }, );
 }
@@ -176,12 +177,14 @@ function getHand(deckID) {
      aceA.flip = true;
      userScore = userScore - 10;
      $("#userPoints").text(userScore);
+     $("#userPoints2").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped - 1;
     }
     else if (aceA.drew === true && aceA.flip === true && click.stand === false) {
      aceA.flip = false;
      userScore = userScore + 10;
      $("#userPoints").text(userScore);
+     $("#userPoints2").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
     }
    });
@@ -212,16 +215,19 @@ function getHand(deckID) {
      aceB.flip = true;
      userScore = userScore - 10;
      $("#userPoints").text(userScore);
+     $("#userPoints2").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped - 1;
     }
     else if (aceB.drew === true && aceB.flip === true && click.stand === false) {
      aceB.flip = false;
      userScore = userScore + 10;
      $("#userPoints").text(userScore);
+     $("#userPoints2").text(userScore);
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
     }
    });
    $("#userPoints").text(userScore);
+   $("#userPoints2").text(userScore);
   },
  }, );
 }
@@ -349,6 +355,7 @@ function hit(deckID) {
        }
        aces[aceID] = !(aces[aceID]);
        $("#userPoints").text(userScore);
+       $("#userPoints2").text(userScore);
       });
       userScoreHit = userScoreHit + 11;
       aceC.drew = true;
@@ -364,11 +371,13 @@ function hit(deckID) {
        aceC.flip = true;
        userScore = userScore - 10;
        $("#userPoints").text(userScore);
+       $("#userPoints2").text(userScore);
       }
       else if (aceC.drew === true && aceC.flip === true && click.stand === false) {
        aceC.flip = false;
        userScore = userScore + 10;
        $("#userPoints").text(userScore);
+       $("#userPoints2").text(userScore);
       }
      });
     },
@@ -444,6 +453,7 @@ function victor(compScore) {
   $("#winner").text(", you won!");
   $("#comma").text(" VS ")
   $("#compPoints").text(compScore);
+  $("#compPoints2").text(compScore);
   var userWon = true;
   won(userWon, compScore);
  }
@@ -452,6 +462,7 @@ function victor(compScore) {
   $("#winner").text(", you won!");
   $("#comma").text(" VS ")
   $("#compPoints").text(compScore);
+  $("#compPoints2").text(compScore);
   var userWon = true;
   won(userWon, compScore);
  }
@@ -459,6 +470,7 @@ function victor(compScore) {
   $("#winner").text(", the dealer won!");
   $("#comma").text(" VS ");
   $("#compPoints").text(compScore);
+  $("#compPoints2").text(compScore);
   var compWon = true;
   lost(compWon);
  }
@@ -468,6 +480,7 @@ function victor(compScore) {
    $("#winner").text(", the dealer won!");
    $("#comma").text(" VS ");
    $("#compPoints").text(compScore);
+   $("#compPoints2").text(compScore);
    var compWon = true;
    lost(compWon);
   }
