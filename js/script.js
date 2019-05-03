@@ -1,4 +1,9 @@
 /* global $ */
+// var audio = new Audio('https://www.youtube.com/watch?v=ld5aYossAcY');
+// audio.play();
+var game = {
+    music: "https://www.youtube.com/watch?v=ld5aYossAcY",
+}
 var click = {
  blackjack: false,
  deal: false,
@@ -363,6 +368,7 @@ function hit(deckID) {
      }
      userPointsVal = Number($("#userPoints").text());
      $("#userPoints").text(userPointsVal + userScoreHit);
+     $("#userPoints2").text(userPointsVal + userScoreHit);
      bust();
      click.hit = false;
      $(".cardC").click(function() {
