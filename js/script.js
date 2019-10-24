@@ -1,6 +1,7 @@
 /* global $ */
 // var audio = new Audio('https://www.youtube.com/watch?v=ld5aYossAcY');
 // audio.play();
+var buttonPickCounter = 1;
 var game = {
     music: "https://www.youtube.com/watch?v=ld5aYossAcY",
 }
@@ -238,13 +239,14 @@ function getHand(deckID) {
 }
 // 4, Resets all variables/////////////////////////////////////////////////////////////////////////////////////////////////
 function reset() {
+var buttonPickCounter = 1
  var compWon = false;
  var userWon = false;
  comp.score = 0;
  click.blackjack = false;
  black.jack = "";
  click.cardNum = 2,
-  click.won = false;
+click.won = false;
  click.stand = false;
  click.deal = true;
  click.hit = false;
@@ -255,8 +257,8 @@ function reset() {
  aceB.flip = false;
  aceB.drew = false;
  aceC.flipD = false,
-  aceC.drewD = false,
-  aceC.flipC = false,
+ aceC.drewD = false,
+aceC.flipC = false,
   aceC.drewC = false,
   aceC.flipH = false,
   aceC.drewH = false,
@@ -560,3 +562,14 @@ function blackjack() {
   }
  }
 }
+
+setInterval(buttonPick, 2000)
+function buttonPickCounterFunc(){
+    buttonPickCounter = buttonPickCounter+1
+    return buttonPickCounter
+}
+
+$(html).click(function(){
+    var htmlClick = buttonPickCounterFunc();
+    console.log(htmlClick);
+});
