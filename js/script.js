@@ -1,6 +1,16 @@
 /* global $ */
 // var audio = new Audio('https://www.youtube.com/watch?v=ld5aYossAcY');
 // audio.play();
+function scoreCorrecter (){
+    var userScoreCorrect = Number($("#userPoints").text());
+    if(userScoreCorrect > 21 && aceCounter.numFlipped > 0){
+        userScoreCorrect = userScoreCorrect-10;
+        aceCounter.numFlipped = aceCounter.numFlipped-1;
+        console.log(userScoreCorrect +" crrtrt")
+        $("#userPoints").text(userScoreCorrect);
+        $("#userPoints2").text(userScoreCorrect);
+    }
+}
 var buttonPickCounter = 1;
 var game = {
     music: "https://www.youtube.com/watch?v=ld5aYossAcY",
@@ -345,28 +355,29 @@ function hit(deckID) {
       var cardImg = $("#playerHand").append(handTwo);
       aces[`ace-${i}`] = true;
       bust();
-      $(`#ace-${i}`).click(function() {
-       var aceID = $(this).attr('id');
-       var userScore = Number($("#userPoints").text());
-       if (aces[aceID] === false) {
-        click.ace = true;
-        userScore = userScore + 10;
-        click.ace = false;
-        aceCounter.numFlipped = aceCounter.numFlipped + 1;
-       }
-       if (aces[aceID] === true) {
-        click.ace = true;
-        userScore = userScore - 10;
-        click.ace = false;
-        aceCounter.numFlipped = aceCounter.numFlipped - 1;
-       }
-       aces[aceID] = !(aces[aceID]);
-       $("#userPoints").text(userScore);
-       $("#userPoints2").text(userScore);
-      });
+    //   $(`#ace-${i}`).click(function() {
+    //    var aceID = $(this).attr('id');
+    //    var userScore = Number($("#userPoints").text());
+    //    if (aces[aceID] === false) {
+    //     click.ace = true;
+    //     userScore = userScore + 10;
+    //     click.ace = false;
+    //     aceCounter.numFlipped = aceCounter.numFlipped + 1;
+    //    }
+    //    if (aces[aceID] === true) {
+    //     click.ace = true;
+    //     userScore = userScore - 10;
+    //     click.ace = false;
+    //     aceCounter.numFlipped = aceCounter.numFlipped - 1;
+    //    }
+    //    aces[aceID] = !(aces[aceID]);
+    //    $("#userPoints").text(userScore);
+    //    $("#userPoints2").text(userScore);
+    //   });
       userScoreHit = userScoreHit + 11;
       aceC.drew = true;
       bust();
+      scoreCorrecter ()
      }
      userPointsVal = Number($("#userPoints").text());
      $("#userPoints").text(userPointsVal + userScoreHit);
@@ -380,18 +391,22 @@ function hit(deckID) {
        userScore = userScore - 10;
        $("#userPoints").text(userScore);
        $("#userPoints2").text(userScore);
+       scoreCorrecter ()
       }
       else if (aceC.drew === true && aceC.flip === true && click.stand === false) {
        aceC.flip = false;
        userScore = userScore + 10;
        $("#userPoints").text(userScore);
        $("#userPoints2").text(userScore);
+       scoreCorrecter ()
       }
      });
+     scoreCorrecter ()
     },
    }, );
   }
  });
+ scoreCorrecter ()
 }
 // 6, Computer rules for playing/////////////////////////////////////////////////////////////////////////////////////////////////
 function compDraw(deckID) {
@@ -407,7 +422,7 @@ function compDraw(deckID) {
   url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=20",
   method: "GET",
   success: function(response) {
-   while (compScore-(aceCounter*10) < 17 && i < 20 && compscore < 18) {
+   while (compScore-(aceCounter*10) < 17 && i < 20 && compScore < 18) {
     i = i + 1;
     compCardImg = `<img class="compHandImg, face" src=${response.cards[i].image}\>`;
     compCardID = `${response.cards[i].code}`;
