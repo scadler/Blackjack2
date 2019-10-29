@@ -404,10 +404,10 @@ function compDraw(deckID) {
  var aceCounter = 0;
  var aceFlipped = false;
  $.ajax({
-  url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=8",
+  url: "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=20",
   method: "GET",
   success: function(response) {
-   while (compScore < 17 && i < 8) {
+   while (compScore-(aceCounter*10) < 17 && i < 20 && compscore < 18) {
     i = i + 1;
     compCardImg = `<img class="compHandImg, face" src=${response.cards[i].image}\>`;
     compCardID = `${response.cards[i].code}`;
