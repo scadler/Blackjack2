@@ -242,6 +242,10 @@ function getHand(deckID) {
      aceCounter.numFlipped = aceCounter.numFlipped + 1;
     }
    });
+   if(userScore === 21 && click.hit === false){
+       $("#comma").text(",");
+       $("#winner").text(" Blackjack! You won!");
+   }
    $("#userPoints").text(userScore);
    $("#userPoints2").text(userScore);
   },
