@@ -587,8 +587,3 @@ function buttonPickCounterFunc(){
     buttonPickCounter = buttonPickCounter+1
     return buttonPickCounter
 }
-
-$(html).click(function(){
-    var htmlClick = buttonPickCounterFunc();
-    console.log(htmlClick);
-});
